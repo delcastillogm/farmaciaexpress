@@ -39,10 +39,31 @@
             background: rgba(255,255,255,0.85);
             backdrop-filter: blur(2px);
         }
+        .card-feature {
+            border-radius: 1rem;
+            box-shadow: 0 6px 32px 0 rgba(22,119,255,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card-feature:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 14px 40px 0 rgba(22,119,255,0.18);
+        }
+        .feature-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        .icon-blue { background: #e3f0ff; color: #1976d2; }
+        .icon-green { background: #e6f5ea; color: #38b000; }
+        .icon-purple { background: #f1e6f5; color: #7c3aed; }
     </style>
 </head>
 <body>
-    <!-- Overlay creativo -->
     <div class="bg-overlay"></div>
     <div id="root" class="main-content"></div>
 
@@ -54,6 +75,20 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
+        function FeatureCard({ iconClass, bgClass, title, description }) {
+            return (
+                <div className="col-md-4 mb-4">
+                    <div className="card card-feature h-100 text-center p-4 border-0">
+                        <div className={`feature-icon ${bgClass}`}>
+                            <i className={iconClass}></i>
+                        </div>
+                        <h5 className="fw-bold mb-2">{title}</h5>
+                        <p className="text-secondary mb-0">{description}</p>
+                    </div>
+                </div>
+            );
+        }
+
         function HomePage() {
             return (
                 <div>
@@ -70,10 +105,30 @@
                         </div>
                     </nav>
                     <main className="container py-5">
-                        <div className="text-center">
+                        <div className="text-center mb-5">
                             <h1 className="display-5 fw-bold text-primary mb-3">Tus Medicamentos en la Puerta de tu Casa</h1>
                             <p className="lead text-secondary mb-4">Servicio de delivery rápido y seguro de medicamentos con receta.</p>
                             <a href="MedicineDeliveryForm.html" className="btn btn-primary btn-lg px-5 py-3 shadow">Hacer un Pedido Ahora</a>
+                        </div>
+                        <div className="row justify-content-center mb-5">
+                            <FeatureCard
+                                iconClass="fa-solid fa-shield-halved"
+                                bgClass="icon-blue"
+                                title="Seguro y Confiable"
+                                description="Medicamentos verificados por farmacéuticos certificados y entregas protegidas."
+                            />
+                            <FeatureCard
+                                iconClass="fa-solid fa-headset"
+                                bgClass="icon-purple"
+                                title="Soporte 24/7"
+                                description="Atención y asesoría disponible en todo momento para tu tranquilidad."
+                            />
+                            <FeatureCard
+                                iconClass="fa-solid fa-truck-fast"
+                                bgClass="icon-green"
+                                title="Entrega Rápida"
+                                description="Recibe tus pedidos en menos de 60 minutos, directo en la puerta de tu casa."
+                            />
                         </div>
                     </main>
                     <footer className="bg-dark text-white py-5 mt-5 text-center">
