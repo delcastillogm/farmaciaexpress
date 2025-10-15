@@ -4,61 +4,60 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Pedidos – Farmacia Express</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Z5h6y0aVjFv9KkUOJd7g6mA1U4pV+U1k9+4eG9g8pU2b2pA+P4F5J1cF1sH6N1z0d" crossorigin="anonymous">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" integrity="sha384-wM7g7bFe1JQKX7uZb2W9Zg8mP4m9G7bF5J1cF1sH6N1z0dZ5h6y0aVjFv9KkUOJd" crossorigin="anonymous">
   <style>
     :root{
       --border:#e5e7eb;
       --muted:#6b7280;
       --card:#ffffff;
     }
-    body{background:#f6f7fb}
-    .navbar{background:#ffffff!important; border-bottom:1px solid var(--border)}
-    .card{background:var(--card); border:1px solid var(--border); border-radius:16px}
-    .progress{background:#e9edf5}
-    .progress-bar{background:#0d6efd}
-    .badge-outline{background:#f8fafc; color:#111827; border:1px solid var(--border)}
-    .list-btn{background:#ffffff; border:1px solid var(--border); color:#111827}
-    .list-btn:hover{background:#f8fafc}
-    .list-btn.active{background:#e7f0ff; border-color:#0d6efd}
-    .list-btn .price{color:var(--muted)}
-    .soft{background:#f8fafc; border:1px solid var(--border)}
-    .timeline-row{display:flex; gap:.75rem; margin-bottom:1rem}
-    .timeline-dot{width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff}
-    .sep{height:1px; background:var(--border); margin:1rem 0}
-    .link-plain{text-decoration:none}
+    body{background:#f6f7fb !important;}
+    .navbar{background:#ffffff!important; border-bottom:1px solid var(--border)!important;}
+    .card{background:var(--card)!important; border:1px solid var(--border)!important; border-radius:16px!important;}
+    .progress{background:#e9edf5!important;}
+    .progress-bar{background:#0d6efd!important;}
+    .badge-outline{background:#f8fafc!important; color:#111827!important; border:1px solid var(--border)!important;}
+    .list-btn{background:#ffffff!important; border:1px solid var(--border)!important; color:#111827!important;}
+    .list-btn:hover{background:#f8fafc!important;}
+    .list-btn.active{background:#e7f0ff!important; border-color:#0d6efd!important;}
+    .list-btn .price{color:var(--muted)!important;}
+    .soft{background:#f8fafc!important; border:1px solid var(--border)!important;}
+    .timeline-row{display:flex; gap:.75rem; margin-bottom:1rem;}
+    .timeline-dot{width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff;}
+    .sep{height:1px; background:var(--border)!important; margin:1rem 0;}
+    .link-plain{text-decoration:none!important;}
+    /* Mejoras de tabla para productos */
+    .table > :not(caption) > * > * { background-color: var(--card) !important; }
   </style>
 </head>
 <body>
-
 <!-- NAV -->
 <nav class="navbar sticky-top">
   <div class="container">
     <a class="navbar-brand fw-semibold d-flex align-items-center gap-2 link-plain" href="home.html">
       <i class="bi bi-capsule text-primary"></i> <span>Farmacia Express</span>
     </a>
-
     <form class="d-none d-lg-flex ms-auto me-3" role="search" onsubmit="event.preventDefault()">
       <div class="input-group">
         <span class="input-group-text soft"><i class="bi bi-search text-muted"></i></span>
         <input class="form-control soft" placeholder="Buscar productos…" disabled>
       </div>
     </form>
-
     <div class="d-flex gap-2">
       <a class="btn btn-outline-primary" href="soporte.html"><i class="bi bi-chat-dots me-1"></i> Soporte</a>
       <a class="btn btn-outline-secondary" href="#"><i class="bi bi-truck me-1"></i> Pedidos</a>
     </div>
   </div>
 </nav>
-
 <!-- BACK -->
 <div class="container">
   <a href="home.html" class="btn btn-link text-decoration-none mt-3 mb-2">
     <i class="bi bi-arrow-left"></i> Volver
   </a>
 </div>
-
 <!-- MAIN -->
 <main class="container pb-5">
   <div class="row g-4">
@@ -71,7 +70,6 @@
         </div>
       </div>
     </div>
-
     <!-- RIGHT: order detail -->
     <div class="col-lg-8">
       <div class="card h-100">
@@ -80,16 +78,13 @@
             <h5 class="mb-0">Pedido <span id="ordTitle">#—</span></h5>
             <span id="ordStatus" class="badge badge-outline">—</span>
           </div>
-
           <div class="progress mb-3" role="progressbar">
             <div id="ordProgress" class="progress-bar" style="width:0%"></div>
           </div>
-
           <div id="etaWrap" class="alert soft d-flex align-items-center mb-3">
             <i class="bi bi-clock-history me-2 text-primary"></i>
             <div>Entrega estimada: <strong id="ordEta">—</strong></div>
           </div>
-
           <div id="driverWrap" class="d-flex align-items-center gap-3 p-3 rounded soft mb-4 d-none">
             <div class="fs-2">🛵</div>
             <div class="flex-grow-1">
@@ -98,12 +93,9 @@
             </div>
             <a id="ordCall" class="btn btn-outline-primary" href="#"><i class="bi bi-telephone me-1"></i> Llamar</a>
           </div>
-
           <h6 class="fw-semibold">Historial del pedido</h6>
           <div id="ordTimeline" class="mt-3"></div>
-
           <div class="sep"></div>
-
           <h6 class="fw-semibold">Productos del pedido</h6>
           <div class="table-responsive">
             <table class="table align-middle mb-2">
@@ -116,15 +108,14 @@
               </tfoot>
             </table>
           </div>
-
           <div class="text-muted small mt-2"><i class="bi bi-geo-alt me-1"></i><span id="ordAddress">—</span></div>
         </div>
       </div>
     </div>
   </div>
 </main>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoN0z1HgR6AM4V6j5p6Wv5C6Yp1plf4b5QeXx8lL3Q9i9yi" crossorigin="anonymous"></script>
 <script>
   /* ===== Mock data ===== */
   const statusConfig = {
@@ -134,7 +125,6 @@
     dispatched: { label:'En camino',   icon:'bi-truck',        color:'#8b5cf6' },
     delivered:  { label:'Entregado',   icon:'bi-check-circle', color:'#22c55e' },
   };
-
   let mockOrders = [
     {
       id:"1",
@@ -176,9 +166,7 @@
       ]
     }
   ];
-
   let selectedOrder = mockOrders[0];
-
   /* ===== Helpers ===== */
   const el = sel => document.querySelector(sel);
   function getStatusProgress(s){ const order=["registered","evaluated","prepared","dispatched","delivered"]; return ((order.indexOf(s)+1)/order.length)*100; }
@@ -196,7 +184,6 @@
     return `${hh}:${mm} ${ampm} (${mins} min)`;
   }
   const fmt = (n)=>'S/'+n.toFixed(2);
-
   /* ===== Render list + detail ===== */
   function renderOrdersList(){
     const wrap = el('#ordersList'); wrap.innerHTML='';
@@ -214,22 +201,18 @@
       wrap.appendChild(btn);
     });
   }
-
   function renderOrderDetail(){
     const o=selectedOrder;
     el('#ordTitle').textContent = '#'+o.number;
     const st = el('#ordStatus');
     st.textContent = statusConfig[o.status].label;
     st.className = 'badge '+(o.status==='delivered'?'text-bg-success':'badge-outline');
-
     el('#ordProgress').style.width = getStatusProgress(o.status)+'%';
-
     const etaWrap = el('#etaWrap');
     etaWrap.classList.toggle('d-none', o.status==='delivered');
     if(o.status!=='delivered'){
       el('#ordEta').textContent = fmtEta(o.estimatedDelivery);
     }
-
     const driverWrap = el('#driverWrap');
     const showDriver = o.status==='dispatched' && o.driverInfo;
     driverWrap.classList.toggle('d-none', !showDriver);
@@ -238,7 +221,6 @@
       el('#ordVehicle').textContent = o.driverInfo.vehicle;
       el('#ordCall').href           = `tel:${o.driverInfo.phone.replace(/\s+/g,'')}`;
     }
-
     // timeline
     const tl = el('#ordTimeline'); tl.innerHTML='';
     o.statusHistory.forEach((s,i)=>{
@@ -261,7 +243,6 @@
       </div>`;
       tl.appendChild(row);
     });
-
     // items
     const tb = el('#ordItems'); tb.innerHTML='';
     let total=0;
@@ -274,7 +255,6 @@
     el('#ordTotal').textContent = fmt(total);
     el('#ordAddress').textContent = o.deliveryAddress;
   }
-
   /* init */
   renderOrdersList();
   renderOrderDetail();
