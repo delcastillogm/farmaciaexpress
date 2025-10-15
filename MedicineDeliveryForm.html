@@ -12,47 +12,90 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg mb-4">
+    <!-- INICIO HEADER/NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 py-3" style="border-bottom:1.5px solid #e5e7eb;">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold fs-4" href="index.html" style="color:#1976d2;">
                 <i class="fa-solid fa-capsules text-primary fs-2"></i>
                 Farmacia Express
             </a>
-            <div class="d-flex gap-2 ms-auto">
-                <a href="#" class="btn btn-outline-primary">Soporte</a>
-                <a href="PharmacistReview.html" class="btn btn-outline-secondary">Farmacéutico</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+                <ul class="navbar-nav align-items-center gap-2">
+                    <li class="nav-item">
+                        <a href="intranet.html" class="btn btn-outline-primary px-3">Intranet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="soporte.html" class="btn btn-outline-primary px-3">Soporte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="btn btn-outline-secondary px-3">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="registro.html" class="btn btn-primary px-3">Regístrate</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
+    <!-- FIN HEADER/NAVBAR -->
+
     <div class="main-card shadow-sm">
-        <div class="row align-items-center justify-content-center g-5">
-            <div class="col-md-7 mx-auto">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9 col-12 mx-auto">
                 <h1 class="fw-bold mb-3" style="color:#1976d2;">Solicita tu Pedido</h1>
-                <p class="lead mb-4" style="color:#525c6d;">Ingresa los datos para el delivery de tus medicamentos.</p>
-                <!-- Formulario de Pedido -->
-                <form>
-                    <div class="mb-3">
-                        <label for="nombrePaciente" class="form-label fw-semibold">Nombre</label>
-                        <input type="text" class="form-control" id="nombrePaciente" placeholder="Ingresa tu nombre completo" required>
+                <p class="lead mb-4" style="color:#525c6d;">Completa los datos para el delivery de tus medicamentos. Tu información es confidencial y segura.</p>
+                <form autocomplete="on" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nombrePaciente" class="form-label fw-semibold">Nombre completo</label>
+                            <input type="text" class="form-control" id="nombrePaciente" name="nombre" placeholder="Ej: Juan Pérez" required autocomplete="name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emailPaciente" class="form-label fw-semibold">Correo electrónico</label>
+                            <input type="email" class="form-control" id="emailPaciente" name="email" placeholder="Ej: juan@email.com" required autocomplete="email">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="telefonoPaciente" class="form-label fw-semibold">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefonoPaciente" name="telefono" placeholder="Ej: 999-123-456" required autocomplete="tel">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="direccionEntrega" class="form-label fw-semibold">Dirección de entrega</label>
+                            <input type="text" class="form-control" id="direccionEntrega" name="direccion" placeholder="Ej: Av. Siempre Viva 123" required autocomplete="street-address">
+                        </div>
+                        <div class="col-12">
+                            <label for="medicamentos" class="form-label fw-semibold">Medicamentos requeridos</label>
+                            <textarea class="form-control" id="medicamentos" name="medicamentos" rows="3" placeholder="Detalle los medicamentos o adjunte receta" required></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label for="recetaMedica" class="form-label fw-semibold">Adjuntar receta médica (opcional)</label>
+                            <input type="file" class="form-control" id="recetaMedica" name="receta" accept="image/*,.pdf">
+                        </div>
+                        <div class="col-12">
+                            <label for="observaciones" class="form-label fw-semibold">Observaciones (opcional)</label>
+                            <textarea class="form-control" id="observaciones" name="observaciones" rows="2" placeholder="Indica alergias, horarios preferidos, etc."></textarea>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="aceptoTerminos" required>
+                                <label class="form-check-label fw-semibold" for="aceptoTerminos">
+                                    Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-main w-100">
+                                <i class="fa-solid fa-paper-plane me-2"></i> Solicitar Pedido
+                            </button>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="direccionEntrega" class="form-label fw-semibold">Dirección de entrega</label>
-                        <input type="text" class="form-control" id="direccionEntrega" placeholder="Dirección completa" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="telefonoPaciente" class="form-label fw-semibold">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefonoPaciente" placeholder="Número de contacto" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="medicamentos" class="form-label fw-semibold">Medicamentos requeridos</label>
-                        <textarea class="form-control" id="medicamentos" rows="3" placeholder="Detalle los medicamentos o adjunte receta" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="recetaMedica" class="form-label fw-semibold">Adjuntar receta (opcional)</label>
-                        <input type="file" class="form-control" id="recetaMedica" accept="image/*,.pdf">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-main">Solicitar Pedido</button>
                 </form>
+                <div class="alert alert-info mt-4 text-center small" role="alert">
+                    <i class="fa-solid fa-shield-halved me-1"></i>
+                    Tus datos y recetas serán tratados bajo estricta confidencialidad y solo por personal autorizado.
+                </div>
             </div>
         </div>
     </div>
