@@ -16,9 +16,8 @@
         }
         body {
             min-height: 100vh;
-            position: relative;
-            /* Fondo de imagen principal */
             background: url('imagen1.jpg') center center/cover no-repeat fixed;
+            position: relative;
         }
         /* Franja azul centrada tipo card */
         .blue-strip {
@@ -30,61 +29,110 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none;
             z-index: 1;
+            pointer-events: none;
         }
         .blue-strip-inner {
             width: 100%;
             max-width: 900px;
-            min-height: 400px;
-            background: rgba(22,119,255,0.83);
+            min-height: 420px;
+            background: linear-gradient(135deg, #1976d2 90%, #00cafd 100%);
             box-shadow: 0 10px 40px 0 rgba(22,119,255,0.15);
             border-radius: 2rem;
             margin: auto;
-            padding: 2.5rem 2rem;
+            padding: 3rem 2rem 2.5rem 2rem;
             position: relative;
             pointer-events: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            overflow: visible;
         }
         @media (max-width: 900px) {
-            .blue-strip-inner { max-width: 98vw; min-height: 350px; }
+            .blue-strip-inner { max-width: 99vw; min-height: 350px; }
         }
-        /* Sobrepone el contenido principal */
+
+        /* Tarjetas creativas */
+        .feature-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+        .card-feature {
+            flex: 1 1 260px;
+            max-width: 300px;
+            min-width: 200px;
+            background: rgba(255,255,255,0.90);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(22,119,255,0.10);
+            border: none;
+            padding: 2rem 1.2rem 1.6rem 1.2rem;
+            margin: 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+        .card-feature:hover {
+            transform: translateY(-8px) scale(1.04) rotate(-1deg);
+            box-shadow: 0 16px 48px 0 rgba(22,119,255,0.20);
+        }
+        .feature-icon {
+            width: 3.3rem;
+            height: 3.3rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -2.7rem auto 1rem auto;
+            font-size: 2.1rem;
+            box-shadow: 0 3px 8px 0 rgba(22,119,255,0.10);
+        }
+        .icon-blue { background: #e3f0ff; color: #1976d2; }
+        .icon-green { background: #e6f5ea; color: #38b000; }
+        .icon-purple { background: #f1e6f5; color: #7c3aed; }
+        .card-feature h5 {
+            font-weight: 700;
+            margin-bottom: .4rem;
+            font-size: 1.2rem;
+            color: #1976d2;
+        }
+        .card-feature p {
+            color: #525c6d;
+            font-size: .99rem;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        /* Decorativos */
+        .blue-strip-inner::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -60px;
+            width: 140px; height: 140px;
+            background: radial-gradient(circle, #ffffff80 0%, #1976d2 80%);
+            opacity: .25;
+            border-radius: 80px;
+            z-index: 0;
+        }
+        .blue-strip-inner::after {
+            content: '';
+            position: absolute;
+            bottom: -80px; right: -80px;
+            width: 160px; height: 160px;
+            background: radial-gradient(circle, #00cafd70 0%, #1976d2 100%);
+            opacity: .18;
+            border-radius: 90px;
+            z-index: 0;
+        }
         .main-content {
             position: relative;
             z-index: 2;
             width: 100vw;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* Fondo transparente para que se vea la franja azul */
             background: transparent;
         }
-        .card-feature {
-            border-radius: 1rem;
-            box-shadow: 0 6px 32px 0 rgba(22,119,255,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card-feature:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 14px 40px 0 rgba(22,119,255,0.18);
-        }
-        .feature-icon {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-        .icon-blue { background: #e3f0ff; color: #1976d2; }
-        .icon-green { background: #e6f5ea; color: #38b000; }
-        .icon-purple { background: #f1e6f5; color: #7c3aed; }
         .text-gradient {
             background: linear-gradient(to right, #fff, #e3f0ff 60%, #c3e0ff 100%);
             color: #1976d2;
@@ -95,68 +143,55 @@
     </style>
 </head>
 <body>
-    <!-- Franja azul centrada -->
+    <!-- Franja azul creativa centrada -->
     <div class="blue-strip">
         <div class="blue-strip-inner shadow-lg">
-            <nav class="navbar navbar-expand-lg navbar-dark" style="background: transparent;">
+            <nav class="navbar navbar-expand-lg navbar-dark mb-2" style="background: transparent;">
                 <div class="container-fluid justify-content-center">
-                    <a className="navbar-brand d-flex align-items-center gap-2" href="#">
+                    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
                         <i class="fa-solid fa-capsules text-white fs-2"></i>
                         <span class="fw-semibold text-white fs-3">Farmacia Express</span>
                     </a>
                 </div>
             </nav>
-            <div class="container py-3">
+            <div class="container py-2 px-1">
                 <div class="text-center mb-4">
                     <h1 class="display-5 fw-bold text-gradient mb-2">Tus Medicamentos en la Puerta de tu Casa</h1>
                     <p class="lead text-white mb-4">Servicio de delivery rápido y seguro de medicamentos con receta.</p>
                     <a href="MedicineDeliveryForm.html" class="btn btn-light btn-lg px-5 py-3 shadow">Hacer un Pedido Ahora</a>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-4 mb-3">
-                        <div class="card card-feature text-center border-0 p-4">
-                            <div class="feature-icon icon-blue mx-auto">
-                                <i class="fa-solid fa-shield-halved"></i>
-                            </div>
-                            <h5 class="fw-bold text-white mb-2">Seguro y Confiable</h5>
-                            <p class="text-white-50 mb-0">Medicamentos verificados por farmacéuticos certificados y entregas protegidas.</p>
+                <!-- TARJETAS -->
+                <div class="feature-row">
+                    <div class="card card-feature text-center">
+                        <div class="feature-icon icon-blue mx-auto">
+                            <i class="fa-solid fa-shield-halved"></i>
                         </div>
+                        <h5>Seguro y Confiable</h5>
+                        <p>Medicamentos verificados por farmacéuticos certificados y entregas protegidas.</p>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card card-feature text-center border-0 p-4">
-                            <div class="feature-icon icon-purple mx-auto">
-                                <i class="fa-solid fa-headset"></i>
-                            </div>
-                            <h5 class="fw-bold text-white mb-2">Soporte 24/7</h5>
-                            <p class="text-white-50 mb-0">Atención y asesoría disponible en todo momento para tu tranquilidad.</p>
+                    <div class="card card-feature text-center">
+                        <div class="feature-icon icon-purple mx-auto">
+                            <i class="fa-solid fa-headset"></i>
                         </div>
+                        <h5>Soporte 24/7</h5>
+                        <p>Atención y asesoría disponible en todo momento para tu tranquilidad.</p>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card card-feature text-center border-0 p-4">
-                            <div class="feature-icon icon-green mx-auto">
-                                <i class="fa-solid fa-truck-fast"></i>
-                            </div>
-                            <h5 class="fw-bold text-white mb-2">Entrega Rápida</h5>
-                            <p class="text-white-50 mb-0">Recibe tus pedidos en menos de 60 minutos, directo en la puerta de tu casa.</p>
+                    <div class="card card-feature text-center">
+                        <div class="feature-icon icon-green mx-auto">
+                            <i class="fa-solid fa-truck-fast"></i>
                         </div>
+                        <h5>Entrega Rápida</h5>
+                        <p>Recibe tus pedidos en menos de 60 minutos, directo en la puerta de tu casa.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div id="root" class="main-content"></div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <!-- React y Babel (para que todo siga funcionando si lo necesitas) -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel">
-        // Si necesitas contenido React, agrégalo aquí
-    </script>
     <footer class="bg-dark text-white py-4 text-center position-relative" style="z-index:3;">
         © 2025 Farmacia Express. Todos los derechos reservados.
     </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>
