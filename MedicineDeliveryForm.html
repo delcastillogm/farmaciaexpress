@@ -1,267 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Registro de Pedido | Farmacia Express</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    body { background: #f6f7fb; }
-    .rounded-2xl { border-radius: 1rem; }
-    .file-drop { border: 2px dashed #e5e7eb; border-radius: 1rem; padding: 2rem; background: #f8fafc; text-align: center; position: relative; cursor: pointer; transition: background 0.2s; }
-    .file-drop:hover { background: #f1f5f9; }
-    .file-icon { width: 4rem; height: 4rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin: 0 auto 1rem; }
-    .file-icon.upload { background: #e5e7eb; color: #6b7280;}
-    .file-icon.text { background: #dbeafe; color: #2563eb;}
-    .hidden-input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;}
-    .alert-toast { position: fixed; top: 1rem; right: 1rem; min-width: 320px; z-index: 9999; display: none;}
-    .form-section { margin-bottom: 2rem;}
-    .bg-blue-700 { background: #1d4ed8 !important; }
-    .btn-blue { background: #1d4ed8; color: #fff; }
-    .btn-blue:hover { background: #1e40af; color: #fff; }
-  </style>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Registro de Pedido | Farmacia Express</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS global -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Navbar (puedes integrarlo con tu propio navbar si lo tienes) -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mb-4">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="home.html">
-        <i class="bi bi-capsule text-primary"></i>
-        <span>Farmacia Express</span>
-      </a>
-      <div class="ms-auto d-flex gap-2">
-        <a href="home.html" class="btn btn-outline-primary">Home</a>
-        <a href="#" class="btn btn-outline-secondary">Pedidos</a>
-      </div>
+    <nav class="navbar navbar-expand-lg mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <i class="fa-solid fa-capsules text-primary fs-2"></i>
+                Farmacia Express
+            </a>
+            <div class="d-flex gap-2 ms-auto">
+                <a href="#" class="btn btn-outline-primary">Soporte</a>
+                <a href="PharmacistReview.html" class="btn btn-outline-secondary">Farmacéutico</a>
+            </div>
+        </div>
+    </nav>
+    <div class="main-card shadow-sm">
+        <div class="row align-items-center justify-content-center g-5">
+            <div class="col-md-6 text-center text-md-start">
+                <h1 class="fw-bold mb-3" style="color:#1976d2;">Solicita tu Pedido</h1>
+                <p class="lead mb-4" style="color:#525c6d;">Ingresa los datos para el delivery de tus medicamentos.</p>
+                <!-- Formulario de Pedido -->
+                <form>
+                    <div class="mb-3">
+                        <label for="nombrePaciente" class="form-label fw-semibold">Nombre</label>
+                        <input type="text" class="form-control" id="nombrePaciente" placeholder="Ingresa tu nombre completo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccionEntrega" class="form-label fw-semibold">Dirección de entrega</label>
+                        <input type="text" class="form-control" id="direccionEntrega" placeholder="Dirección completa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefonoPaciente" class="form-label fw-semibold">Teléfono</label>
+                        <input type="tel" class="form-control" id="telefonoPaciente" placeholder="Número de contacto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="medicamentos" class="form-label fw-semibold">Medicamentos requeridos</label>
+                        <textarea class="form-control" id="medicamentos" rows="3" placeholder="Detalle los medicamentos o adjunte receta" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="recetaMedica" class="form-label fw-semibold">Adjuntar receta (opcional)</label>
+                        <input type="file" class="form-control" id="recetaMedica" accept="image/*,.pdf">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-main">Solicitar Pedido</button>
+                </form>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="imagen1.jpg" alt="Paciente en casa" class="hero-img">
+            </div>
+        </div>
+        <!-- Beneficios -->
+        <div class="feature-row mt-3">
+            <div class="card card-feature text-center">
+                <div class="feature-icon icon-blue mx-auto">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h5>Seguro y Confiable</h5>
+                <p>Medicamentos verificados por farmacéuticos certificados y entregas protegidas.</p>
+            </div>
+            <div class="card card-feature text-center">
+                <div class="feature-icon icon-purple mx-auto">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h5>Soporte 24/7</h5>
+                <p>Atención y asesoría disponible en todo momento para tu tranquilidad.</p>
+            </div>
+            <div class="card card-feature text-center">
+                <div class="feature-icon icon-green mx-auto">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <h5>Entrega Rápida</h5>
+                <p>Recibe tus pedidos en menos de 60 minutos, directo en la puerta de tu casa.</p>
+            </div>
+        </div>
     </div>
-  </nav>
-
-  <div class="max-w-3xl mx-auto px-3" style="max-width: 720px; margin: auto;">
-    <!-- Toast de éxito -->
-    <div id="successToast" class="alert alert-success alert-toast" role="alert"></div>
-    <!-- Branding -->
-    <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-4 text-center">
-      <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
-        <div class="file-icon text bg-blue-700">
-          <i class="bi bi-capsule text-white" style="font-size:2rem;"></i>
-        </div>
-      </div>
-      <h1 class="mb-2 fs-4">Registro de Pedido</h1>
-      <p class="text-muted">Delivery de Medicamentos - Farmacia Express</p>
-    </div>
-
-    <form id="deliveryForm" class="space-y-6">
-      <!-- Información Personal -->
-      <div class="bg-white border border-gray-200 rounded-2xl p-4 form-section">
-        <h2 class="mb-4 fs-5">Información Personal</h2>
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label class="form-label">Nombres *</label>
-            <input type="text" class="form-control" name="nombres" placeholder="Ingrese sus nombres" required>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Apellidos *</label>
-            <input type="text" class="form-control" name="apellidos" placeholder="Ingrese sus apellidos" required>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Correo Electrónico *</label>
-            <input type="email" class="form-control" name="email" placeholder="correo@ejemplo.com" required>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Teléfono *</label>
-            <input type="tel" class="form-control" name="telefono" placeholder="999 999 999" required>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dirección de Entrega -->
-      <div class="bg-white border border-gray-200 rounded-2xl p-4 form-section">
-        <h2 class="mb-4 fs-5">Dirección de Entrega</h2>
-        <div class="mb-3">
-          <label class="form-label">Dirección Completa *</label>
-          <input type="text" class="form-control" name="direccion" placeholder="Av. Principal 123, Urb. Los Jardines, Mz. A Lt. 5" required>
-        </div>
-        <div class="row g-3">
-          <div class="col-md-4">
-            <label class="form-label">Departamento *</label>
-            <select id="departamentoSelect" class="form-select" required>
-              <option value="">Seleccionar</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">Provincia *</label>
-            <select id="provinciaSelect" class="form-select" required disabled>
-              <option value="">Seleccionar</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">Distrito *</label>
-            <select id="distritoSelect" class="form-select" required disabled>
-              <option value="">Seleccionar</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Receta Médica -->
-      <div class="bg-white border border-gray-200 rounded-2xl p-4 form-section">
-        <h2 class="mb-4 fs-5">Receta Médica</h2>
-        <div id="fileDrop" class="file-drop mb-2">
-          <input type="file" id="fileInput" accept="image/*,.pdf" class="hidden-input" required>
-          <div id="uploadIcon" class="file-icon upload">
-            <i class="bi bi-upload" style="font-size:2rem;"></i>
-          </div>
-          <div id="fileText">
-            <p class="text-dark mb-1">Subir imagen de receta médica</p>
-            <p class="text-muted small">PNG, JPG o PDF hasta 10MB</p>
-          </div>
-        </div>
-        <p class="text-muted small">* La receta médica es obligatoria para medicamentos con prescripción</p>
-      </div>
-
-      <!-- Botones -->
-      <div class="row g-3 pt-3">
-        <div class="col-6">
-          <button type="button" class="btn btn-outline-secondary w-100 h-100" onclick="window.location.href='home.html'">Cancelar</button>
-        </div>
-        <div class="col-6">
-          <button type="submit" class="btn btn-blue w-100 h-100">Registrar Pedido</button>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <script>
-    // Location data (departamento, provincia, distrito)
-    const locationData = {
-      'Lima': {
-        'Lima': ['Cercado de Lima', 'Barranco', 'Jesús María', 'La Molina', 'Lince', 'Magdalena del Mar', 'Miraflores', 'Pueblo Libre', 'San Borja', 'San Isidro', 'San Miguel', 'Santiago de Surco', 'Surquillo'],
-        'Callao': ['Callao', 'Bellavista', 'Carmen de la Legua', 'La Perla', 'La Punta', 'Ventanilla'],
-        'Cañete': ['San Vicente de Cañete', 'Asia', 'Calango', 'Cerro Azul', 'Imperial']
-      },
-      'Arequipa': {
-        'Arequipa': ['Arequipa', 'Alto Selva Alegre', 'Cayma', 'Cerro Colorado', 'Characato', 'Chiguata', 'Jacobo Hunter', 'José Luis Bustamante y Rivero', 'Mariano Melgar', 'Miraflores', 'Paucarpata', 'Sachaca', 'Socabaya', 'Tiabaya', 'Yanahuara'],
-        'Camaná': ['Camaná', 'José María Quimper', 'Mariano Nicolás Valcárcel', 'Mariscal Cáceres', 'Nicolás de Piérola', 'Ocoña', 'Quilca', 'Samuel Pastor'],
-        'Caylloma': ['Chivay', 'Achoma', 'Cabanaconde', 'Callalli', 'Caylloma', 'Coporaque', 'Huambo', 'Huanca', 'Ichupampa', 'Lari']
-      },
-      'La Libertad': {
-        'Trujillo': ['Trujillo', 'El Porvenir', 'Florencia de Mora', 'Huanchaco', 'La Esperanza', 'Laredo', 'Moche', 'Poroto', 'Salaverry', 'Simbal', 'Víctor Larco Herrera'],
-        'Ascope': ['Ascope', 'Chicama', 'Chocope', 'Magdalena de Cao', 'Paijan', 'Rázuri', 'Santiago de Cao', 'Casa Grande'],
-        'Pacasmayo': ['San Pedro de Lloc', 'Guadalupe', 'Jequetepeque', 'Pacasmayo', 'San José']
-      },
-      'Cusco': {
-        'Cusco': ['Cusco', 'Ccorca', 'Poroy', 'San Jerónimo', 'San Sebastián', 'Santiago', 'Saylla', 'Wanchaq'],
-        'Anta': ['Anta', 'Ancahuasi', 'Cachimayo', 'Chinchaypujio', 'Huarocondo', 'Limatambo', 'Mollepata', 'Pucyura', 'Zurite'],
-        'La Convención': ['Santa Ana', 'Echarate', 'Huayopata', 'Maranura', 'Ocobamba', 'Quellouno', 'Kimbiri', 'Santa Teresa', 'Vilcabamba']
-      },
-      'Piura': {
-        'Piura': ['Piura', 'Castilla', 'Catacaos', 'Cura Mori', 'El Tallán', 'La Arena', 'La Unión', 'Las Lomas', 'Tambo Grande'],
-        'Sullana': ['Sullana', 'Bellavista', 'Ignacio Escudero', 'Lancones', 'Marcavelica', 'Miguel Checa', 'Querecotillo', 'Salitral'],
-        'Talara': ['Pariñas', 'El Alto', 'La Brea', 'Lobitos', 'Los Órganos', 'Máncora']
-      },
-      'Lambayeque': {
-        'Chiclayo': ['Chiclayo', 'Chongoyape', 'Eten', 'Eten Puerto', 'José Leonardo Ortiz', 'La Victoria', 'Lagunas', 'Monsefú', 'Nueva Arica', 'Oyotún', 'Pátapo', 'Picsi', 'Pimentel', 'Pomalca', 'Pucalá', 'Reque', 'Santa Rosa', 'Saña', 'Tumán'],
-        'Lambayeque': ['Lambayeque', 'Chóchope', 'Illimo', 'Jayanca', 'Mórrope', 'Motupe', 'Olmos', 'Pacora', 'Salas', 'San José', 'Túcume'],
-        'Ferreñafe': ['Ferreñafe', 'Cañaris', 'Incahuasi', 'Manuel Antonio Mesones Muro', 'Pítipo', 'Pueblo Nuevo']
-      }
-    };
-
-    // Populate Departamento
-    const departamentoSelect = document.getElementById('departamentoSelect');
-    const provinciaSelect = document.getElementById('provinciaSelect');
-    const distritoSelect = document.getElementById('distritoSelect');
-    Object.keys(locationData).forEach(dep => {
-      const opt = document.createElement('option');
-      opt.value = dep;
-      opt.textContent = dep;
-      departamentoSelect.appendChild(opt);
-    });
-
-    // Departamento change
-    departamentoSelect.addEventListener('change', function() {
-      provinciaSelect.innerHTML = '<option value="">Seleccionar</option>';
-      distritoSelect.innerHTML = '<option value="">Seleccionar</option>';
-      provinciaSelect.disabled = true;
-      distritoSelect.disabled = true;
-      if (this.value && locationData[this.value]) {
-        provinciaSelect.disabled = false;
-        Object.keys(locationData[this.value]).forEach(prov => {
-          const opt = document.createElement('option');
-          opt.value = prov;
-          opt.textContent = prov;
-          provinciaSelect.appendChild(opt);
-        });
-      }
-    });
-
-    // Provincia change
-    provinciaSelect.addEventListener('change', function() {
-      distritoSelect.innerHTML = '<option value="">Seleccionar</option>';
-      distritoSelect.disabled = true;
-      const dep = departamentoSelect.value;
-      if (dep && this.value && locationData[dep][this.value]) {
-        distritoSelect.disabled = false;
-        locationData[dep][this.value].forEach(dist => {
-          const opt = document.createElement('option');
-          opt.value = dist;
-          opt.textContent = dist;
-          distritoSelect.appendChild(opt);
-        });
-      }
-    });
-
-    // File upload
-    const fileInput = document.getElementById('fileInput');
-    const fileDrop = document.getElementById('fileDrop');
-    const uploadIcon = document.getElementById('uploadIcon');
-    const fileText = document.getElementById('fileText');
-    fileInput.addEventListener('change', function() {
-      if (this.files && this.files[0]) {
-        uploadIcon.classList.remove('upload');
-        uploadIcon.classList.add('text');
-        uploadIcon.innerHTML = '<i class="bi bi-file-earmark-text" style="font-size:2rem;"></i>';
-        fileText.innerHTML = `<p class="mb-1 text-dark">Archivo cargado: ${this.files[0].name}</p>
-          <p class="text-muted small">Haga clic para cambiar</p>`;
-      } else {
-        uploadIcon.classList.add('upload');
-        uploadIcon.classList.remove('text');
-        uploadIcon.innerHTML = '<i class="bi bi-upload" style="font-size:2rem;"></i>';
-        fileText.innerHTML = `<p class="mb-1 text-dark">Subir imagen de receta médica</p>
-          <p class="text-muted small">PNG, JPG o PDF hasta 10MB</p>`;
-      }
-    });
-    fileDrop.addEventListener('click', function() {
-      fileInput.click();
-    });
-
-    // Toast
-    function showToast(message, orderNumber) {
-      const toast = document.getElementById('successToast');
-      toast.innerHTML = `<strong>¡Pedido registrado exitosamente!</strong><br>Tu pedido <b>#${orderNumber}</b> ha sido registrado. Un farmacéutico lo revisará pronto.`;
-      toast.style.display = 'block';
-      setTimeout(() => toast.style.display = 'none', 5000);
-    }
-
-    // Form submit
-    document.getElementById('deliveryForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const orderNumber = 'MD' + Math.floor(100000 + Math.random() * 900000);
-      showToast('¡Pedido registrado exitosamente!', orderNumber);
-      setTimeout(() => {
-        // Reset form fields
-        this.reset();
-        uploadIcon.classList.add('upload');
-        uploadIcon.classList.remove('text');
-        uploadIcon.innerHTML = '<i class="bi bi-upload" style="font-size:2rem;"></i>';
-        fileText.innerHTML = `<p class="mb-1 text-dark">Subir imagen de receta médica</p>
-          <p class="text-muted small">PNG, JPG o PDF hasta 10MB</p>`;
-        provinciaSelect.innerHTML = '<option value="">Seleccionar</option>';
-        distritoSelect.innerHTML = '<option value="">Seleccionar</option>';
-        provinciaSelect.disabled = true;
-        distritoSelect.disabled = true;
-      }, 2000);
-    });
-  </script>
+    <footer class="bg-dark text-white py-4 text-center position-relative mt-5" style="z-index:3;">
+        © 2025 Farmacia Express. Todos los derechos reservados.
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>
