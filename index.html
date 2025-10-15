@@ -180,7 +180,19 @@
                     color: 'bg-green-600',
                     hoverColor: 'hover:bg-green-700',
                     view: 'tracking',
-                    requiresAuth: true
+                    requiresAuth: true,
+                    link: 'PharmacistReview.html'
+                },
+                {
+                    id: 'pharmacist',
+                    title: 'Panel Farmacéutico',
+                    description: 'Revisa y gestiona los pedidos recibidos',
+                    icon: UserCheck,
+                    color: 'bg-purple-600',
+                    hoverColor: 'hover:bg-purple-700',
+                    view: 'pharmacist',
+                    requiresAuth: true,
+                    link: 'PharmacistReview.html'
                 }
             ];
 
@@ -188,7 +200,13 @@
                 if (!user) {
                     setIsLoginModalOpen(true);
                 } else {
-                    alert(`Navegando a ${view}`);
+                    // Check if service has a link
+                    const service = services.find(s => s.view === view);
+                    if (service && service.link) {
+                        window.location.href = service.link;
+                    } else {
+                        alert(`Navegando a ${view}`);
+                    }
                 }
             };
 
@@ -201,7 +219,13 @@
             };
 
             const navigateTo = (view) => {
-                alert(`Navegando a ${view}`);
+                // Check if service has a link
+                const service = services.find(s => s.view === view);
+                if (service && service.link) {
+                    window.location.href = service.link;
+                } else {
+                    alert(`Navegando a ${view}`);
+                }
             };
 
             return (
@@ -477,3 +501,4 @@
         root.render(<HomePage />);
     </script>
 </body>
+</html>
