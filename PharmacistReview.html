@@ -1,0 +1,301 @@
+import React, { useState } from 'react';
+import { Button } from './ui/button';
+import { Label } from './ui/label';
+import { Textarea } from './ui/textarea';
+import { Badge } from './ui/badge';
+import { UserCheck, Download, Eye, CheckCircle, AlertTriangle, XCircle, Calendar, FileText } from 'lucide-react';
+import { Navbar } from './Navbar';
+import { toast } from 'sonner';
+
+interface PharmacistReviewProps {
+  onGoHome: () => void;
+}
+
+export function PharmacistReview({ onGoHome }: PharmacistReviewProps) {
+  const [selectedAction, setSelectedAction] = useState<string>('');
+  const [comments, setComments] = useState('');
+
+  // Datos de ejemplo del pedido
+  const orderData = {
+    id: 'PED-2024-001',
+    fecha: '15/10/2024 - 14:30',
+    estado: 'Pendiente Revisión',
+    cliente: {
+      nombres: 'María Elena',
+      apellidos: 'González Pérez',
+      correo: 'maria.gonzalez@email.com',
+      telefono: '987 654 321',
+      direccion: 'Av. Los Jardines 456, Urb. San Carlos, Mz. B Lt. 12',
+      departamento: 'Lima',
+      provincia: 'Lima',
+      distrito: 'San Borja'
+    }
+  };
+
+  const handleAction = (action: string) => {
+    setSelectedAction(action);
+    console.log(`Acción seleccionada: ${action}`);
+  };
+
+  const handleSubmit = () => {
+    if (!selectedAction) {
+      toast.error('Debe seleccionar una acción', {
+        description: 'Por favor, seleccione si desea aprobar, observar o rechazar el pedido.',
+      });
+      return;
+    }
+
+    // Verificar comentarios requeridos
+    if ((selectedAction === 'observar' || selectedAction === 'rechazar') && !comments.trim()) {
+      toast.error('Comentarios requeridos', {
+        description: `Debe ingresar un comentario para ${selectedAction} el pedido.`,
+      });
+      return;
+    }
+
+    // Mensajes según la acción
+    const messages = {
+      aprobar: {
+        title: '✓ Pedido aprobado exitosamente',
+        description: `El pedido #${orderData.id} ha sido aprobado y enviado a preparación.`,
+        icon: <CheckCircle className="h-5 w-5" />
+      },
+      observar: {
+        title: '⚠ Pedido marcado con observaciones',
+        description: `Se ha notificado al cliente sobre las observaciones del pedido #${orderData.id}.`,
+        icon: <AlertTriangle className="h-5 w-5" />
+      },
+      rechazar: {
+        title: '✕ Pedido rechazado',
+        description: `El pedido #${orderData.id} ha sido rechazado. El cliente será notificado.`,
+        icon: <XCircle className="h-5 w-5" />
+      }
+    };
+
+    const message = messages[selectedAction as keyof typeof messages];
+    
+    toast.success(message.title, {
+      description: message.description,
+      duration: 5000,
+      icon: message.icon,
+    });
+
+    // Resetear formulario después de 1 segundo
+    setTimeout(() => {
+      setSelectedAction('');
+      setComments('');
+    }, 1000);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#f6f7fb]">
+      <Navbar onGoHome={onGoHome} />
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-6">
+          <div className="flex items-start justify-between">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center flex-shrink-0">
+                <UserCheck className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="mb-1">Panel Farmacéutico - Revisión de Pedidos</h1>
+                <div className="flex items-center gap-3 text-sm text-gray-600">
+                  <span>Pedido #{orderData.id}</span>
+                  <span>•</span>
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="w-4 h-4" />
+                    {orderData.fecha}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Badge variant="outline" className="px-3 py-1.5 bg-yellow-50 border-yellow-200 text-yellow-800">
+              {orderData.estado}
+            </Badge>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Información del Cliente */}
+          <div className="space-y-6">
+            <div className="bg-white border border-gray-200 rounded-2xl p-6">
+              <h2 className="mb-6">Información del Cliente</h2>
+              
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label className="text-sm text-gray-600 mb-1.5 block">Nombres</Label>
+                    <div className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg">
+                      {orderData.cliente.nombres}
+                    </div>
+                  </div>
+                  <div>
+                    <Label className="text-sm text-gray-600 mb-1.5 block">Apellidos</Label>
+                    <div className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg">
+                      {orderData.cliente.apellidos}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label className="text-sm text-gray-600 mb-1.5 block">Correo</Label>
+                    <div className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                      {orderData.cliente.correo}
+                    </div>
+                  </div>
+                  <div>
+                    <Label className="text-sm text-gray-600 mb-1.5 block">Teléfono</Label>
+                    <div className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg">
+                      {orderData.cliente.telefono}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-2xl p-6">
+              <h2 className="mb-6">Dirección de Entrega</h2>
+              
+              <div className="space-y-4">
+                <div>
+                  <Label className="text-sm text-gray-600 mb-1.5 block">Dirección Completa</Label>
+                  <div className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                    {orderData.cliente.direccion}
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <Label className="text-sm text-gray-600 mb-1.5 block">Departamento</Label>
+                    <div className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                      {orderData.cliente.departamento}
+                    </div>
+                  </div>
+                  <div>
+                    <Label className="text-sm text-gray-600 mb-1.5 block">Provincia</Label>
+                    <div className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                      {orderData.cliente.provincia}
+                    </div>
+                  </div>
+                  <div>
+                    <Label className="text-sm text-gray-600 mb-1.5 block">Distrito</Label>
+                    <div className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                      {orderData.cliente.distrito}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Receta Médica */}
+          <div className="space-y-6">
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 h-full">
+              <h2 className="mb-6">Receta Médica</h2>
+              
+              <div className="border-2 border-gray-300 bg-gray-50 rounded-xl p-8 text-center min-h-[360px] flex flex-col justify-center">
+                <div className="space-y-4">
+                  <div className="w-24 h-24 bg-white border-2 border-gray-300 mx-auto flex items-center justify-center rounded-lg shadow-sm">
+                    <FileText className="w-12 h-12 text-gray-400" />
+                  </div>
+                  <p className="text-gray-700">IMAGEN DE RECETA MÉDICA</p>
+                  <p className="text-sm text-gray-500">receta_001.jpg - 2.4 MB</p>
+                  <div className="flex justify-center gap-2 pt-2">
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <Eye className="h-4 w-4" />
+                      Ver Completa
+                    </Button>
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <Download className="h-4 w-4" />
+                      Descargar
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Evaluación del Farmacéutico */}
+        <div className="mt-6 bg-white border border-gray-200 rounded-2xl p-6">
+          <h2 className="mb-6">Evaluación del Pedido</h2>
+          
+          <div className="space-y-6">
+            {/* Botones de Acción */}
+            <div>
+              <Label className="mb-3 block">Decisión sobre el pedido:</Label>
+              <div className="flex flex-wrap gap-3">
+                <Button 
+                  variant={selectedAction === 'aprobar' ? 'default' : 'outline'}
+                  className={`h-12 px-6 gap-2 ${selectedAction === 'aprobar' ? 'bg-green-600 hover:bg-green-700 text-white' : 'hover:bg-green-50 hover:border-green-600 hover:text-green-700'}`}
+                  onClick={() => handleAction('aprobar')}
+                >
+                  <CheckCircle className="h-4 w-4" />
+                  Aprobar
+                </Button>
+                <Button 
+                  variant={selectedAction === 'observar' ? 'default' : 'outline'}
+                  className={`h-12 px-6 gap-2 ${selectedAction === 'observar' ? 'bg-yellow-600 hover:bg-yellow-700 text-white' : 'hover:bg-yellow-50 hover:border-yellow-600 hover:text-yellow-700'}`}
+                  onClick={() => handleAction('observar')}
+                >
+                  <AlertTriangle className="h-4 w-4" />
+                  Observar
+                </Button>
+                <Button 
+                  variant={selectedAction === 'rechazar' ? 'default' : 'outline'}
+                  className={`h-12 px-6 gap-2 ${selectedAction === 'rechazar' ? 'bg-red-600 hover:bg-red-700 text-white' : 'hover:bg-red-50 hover:border-red-600 hover:text-red-700'}`}
+                  onClick={() => handleAction('rechazar')}
+                >
+                  <XCircle className="h-4 w-4" />
+                  Rechazar
+                </Button>
+              </div>
+            </div>
+
+            {/* Área de Comentarios */}
+            <div>
+              <Label htmlFor="comments" className="mb-2 block">
+                Comentarios {selectedAction && (
+                  <span className="text-gray-500">
+                    ({selectedAction === 'aprobar' ? 'Opcional' : 'Requerido'})
+                  </span>
+                )}
+              </Label>
+              <Textarea
+                id="comments"
+                placeholder={
+                  selectedAction === 'aprobar' 
+                    ? 'Comentarios adicionales para el cliente...'
+                    : selectedAction === 'observar'
+                    ? 'Especifique las observaciones para el cliente...'
+                    : selectedAction === 'rechazar'
+                    ? 'Motivo del rechazo...'
+                    : 'Ingrese sus comentarios aquí...'
+                }
+                value={comments}
+                onChange={(e) => setComments(e.target.value)}
+                className="min-h-[120px]"
+              />
+            </div>
+
+            {/* Botón de Confirmación */}
+            <div className="flex justify-end gap-3 pt-4">
+              <Button variant="outline" className="px-8">
+                Cancelar
+              </Button>
+              <Button 
+                className="px-8 bg-blue-700 hover:bg-blue-800"
+                disabled={!selectedAction}
+                onClick={handleSubmit}
+              >
+                Confirmar {selectedAction && selectedAction.charAt(0).toUpperCase() + selectedAction.slice(1)}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
