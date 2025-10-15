@@ -9,30 +9,29 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body, html {
+        html, body {
             height: 100%;
             margin: 0;
             padding: 0;
         }
-        .bg-creative {
-            /* Fondo con imagen y overlay degradado */
+        /* Fondo de imagen + overlay creativo */
+        body {
             min-height: 100vh;
-            width: 100vw;
-            position: fixed;
-            inset: 0;
-            z-index: -2;
             background:
-                linear-gradient(135deg, rgba(22,119,255,0.35) 0%, rgba(255,255,255,0.6) 60%, rgba(0,212,255,0.35) 100%),
-                url('your_local_or_hosted_image_path.jpg') center center/cover no-repeat;
-            filter: blur(0px);
+                linear-gradient(135deg, rgba(22,119,255,0.25) 0%, rgba(255,255,255,0.75) 60%, rgba(0,212,255,0.18) 100%),
+                url('imagen1.jpg') center center/cover no-repeat;
+            position: relative;
         }
+        /* Overlay con efectos de color y blur */
         .bg-overlay {
             position: fixed;
             inset: 0;
-            z-index: -1;
-            background: radial-gradient(circle at 80% 25%, rgba(22,119,255,0.25) 0px, transparent 340px),
-                        radial-gradient(circle at 15% 80%, rgba(0,212,255,0.18) 0px, transparent 320px),
-                        linear-gradient(120deg, rgba(255,255,255,0.12) 60%, transparent 100%);
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 80% 20%, rgba(22,119,255,0.15) 0px, transparent 340px),
+                        radial-gradient(circle at 10% 80%, rgba(0,212,255,0.11) 0px, transparent 320px),
+                        linear-gradient(120deg, rgba(255,255,255,0.07) 60%, transparent 100%);
+            backdrop-filter: blur(1px);
         }
         .main-content {
             position: relative;
@@ -45,8 +44,7 @@
     </style>
 </head>
 <body>
-    <!-- Fondo creativo -->
-    <div class="bg-creative"></div>
+    <!-- Overlay creativo -->
     <div class="bg-overlay"></div>
     <div id="root" class="main-content"></div>
 
@@ -61,6 +59,7 @@
         function HomePage() {
             return (
                 <div>
+                    {/* Navbar Bootstrap */}
                     <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm mb-4">
                         <div className="container">
                             <a className="navbar-brand d-flex align-items-center gap-2" href="#">
