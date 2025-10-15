@@ -16,28 +16,52 @@
         }
         body {
             min-height: 100vh;
-            /* Cambia la ruta a la imagen según donde la tengas */
-            background:
-                linear-gradient(135deg, rgba(22,119,255,0.25) 0%, rgba(255,255,255,0.75) 60%, rgba(0,212,255,0.18) 100%),
-                url('imagen1.jpg') center center/cover no-repeat;
             position: relative;
+            /* Fondo de imagen principal */
+            background: url('imagen1.jpg') center center/cover no-repeat fixed;
         }
-        .bg-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
+        /* Franja azul centrada tipo card */
+        .blue-strip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             pointer-events: none;
-            background: radial-gradient(circle at 80% 20%, rgba(22,119,255,0.15) 0px, transparent 340px),
-                        radial-gradient(circle at 10% 80%, rgba(0,212,255,0.11) 0px, transparent 320px),
-                        linear-gradient(120deg, rgba(255,255,255,0.07) 60%, transparent 100%);
-            backdrop-filter: blur(1px);
+            z-index: 1;
         }
+        .blue-strip-inner {
+            width: 100%;
+            max-width: 900px;
+            min-height: 400px;
+            background: rgba(22,119,255,0.83);
+            box-shadow: 0 10px 40px 0 rgba(22,119,255,0.15);
+            border-radius: 2rem;
+            margin: auto;
+            padding: 2.5rem 2rem;
+            position: relative;
+            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        @media (max-width: 900px) {
+            .blue-strip-inner { max-width: 98vw; min-height: 350px; }
+        }
+        /* Sobrepone el contenido principal */
         .main-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            width: 100vw;
             min-height: 100vh;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(2px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Fondo transparente para que se vea la franja azul */
+            background: transparent;
         }
         .card-feature {
             border-radius: 1rem;
@@ -49,8 +73,8 @@
             box-shadow: 0 14px 40px 0 rgba(22,119,255,0.18);
         }
         .feature-icon {
-            width: 3.5rem;
-            height: 3.5rem;
+            width: 3rem;
+            height: 3rem;
             border-radius: 1rem;
             display: flex;
             align-items: center;
@@ -61,83 +85,78 @@
         .icon-blue { background: #e3f0ff; color: #1976d2; }
         .icon-green { background: #e6f5ea; color: #38b000; }
         .icon-purple { background: #f1e6f5; color: #7c3aed; }
+        .text-gradient {
+            background: linear-gradient(to right, #fff, #e3f0ff 60%, #c3e0ff 100%);
+            color: #1976d2;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
     </style>
 </head>
 <body>
-    <div class="bg-overlay"></div>
+    <!-- Franja azul centrada -->
+    <div class="blue-strip">
+        <div class="blue-strip-inner shadow-lg">
+            <nav class="navbar navbar-expand-lg navbar-dark" style="background: transparent;">
+                <div class="container-fluid justify-content-center">
+                    <a className="navbar-brand d-flex align-items-center gap-2" href="#">
+                        <i class="fa-solid fa-capsules text-white fs-2"></i>
+                        <span class="fw-semibold text-white fs-3">Farmacia Express</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="container py-3">
+                <div class="text-center mb-4">
+                    <h1 class="display-5 fw-bold text-gradient mb-2">Tus Medicamentos en la Puerta de tu Casa</h1>
+                    <p class="lead text-white mb-4">Servicio de delivery rápido y seguro de medicamentos con receta.</p>
+                    <a href="MedicineDeliveryForm.html" class="btn btn-light btn-lg px-5 py-3 shadow">Hacer un Pedido Ahora</a>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-4 mb-3">
+                        <div class="card card-feature text-center border-0 p-4">
+                            <div class="feature-icon icon-blue mx-auto">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h5 class="fw-bold text-white mb-2">Seguro y Confiable</h5>
+                            <p class="text-white-50 mb-0">Medicamentos verificados por farmacéuticos certificados y entregas protegidas.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card card-feature text-center border-0 p-4">
+                            <div class="feature-icon icon-purple mx-auto">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <h5 class="fw-bold text-white mb-2">Soporte 24/7</h5>
+                            <p class="text-white-50 mb-0">Atención y asesoría disponible en todo momento para tu tranquilidad.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card card-feature text-center border-0 p-4">
+                            <div class="feature-icon icon-green mx-auto">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
+                            <h5 class="fw-bold text-white mb-2">Entrega Rápida</h5>
+                            <p class="text-white-50 mb-0">Recibe tus pedidos en menos de 60 minutos, directo en la puerta de tu casa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="root" class="main-content"></div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <!-- React y Babel -->
+    <!-- React y Babel (para que todo siga funcionando si lo necesitas) -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
     <script type="text/babel">
-        function FeatureCard({ iconClass, bgClass, title, description }) {
-            return (
-                <div className="col-md-4 mb-4">
-                    <div className="card card-feature h-100 text-center p-4 border-0">
-                        <div className={`feature-icon ${bgClass}`}>
-                            <i className={iconClass}></i>
-                        </div>
-                        <h5 className="fw-bold mb-2">{title}</h5>
-                        <p className="text-secondary mb-0">{description}</p>
-                    </div>
-                </div>
-            );
-        }
-
-        function HomePage() {
-            return (
-                <div>
-                    <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm mb-4">
-                        <div className="container">
-                            <a className="navbar-brand d-flex align-items-center gap-2" href="#">
-                                <i className="fa-solid fa-capsules text-primary fs-2"></i>
-                                <span className="fw-semibold">Farmacia Express</span>
-                            </a>
-                            <div className="d-flex gap-2 ms-auto">
-                                <a href="#" className="btn btn-outline-primary">Soporte</a>
-                                <a href="PharmacistReview.html" className="btn btn-outline-secondary">Farmacéutico</a>
-                            </div>
-                        </div>
-                    </nav>
-                    <main className="container py-5">
-                        <div className="text-center mb-5">
-                            <h1 className="display-5 fw-bold text-primary mb-3">Tus Medicamentos en la Puerta de tu Casa</h1>
-                            <p className="lead text-secondary mb-4">Servicio de delivery rápido y seguro de medicamentos con receta.</p>
-                            <a href="MedicineDeliveryForm.html" className="btn btn-primary btn-lg px-5 py-3 shadow">Hacer un Pedido Ahora</a>
-                        </div>
-                        <div className="row justify-content-center mb-5">
-                            <FeatureCard
-                                iconClass="fa-solid fa-shield-halved"
-                                bgClass="icon-blue"
-                                title="Seguro y Confiable"
-                                description="Medicamentos verificados por farmacéuticos certificados y entregas protegidas."
-                            />
-                            <FeatureCard
-                                iconClass="fa-solid fa-headset"
-                                bgClass="icon-purple"
-                                title="Soporte 24/7"
-                                description="Atención y asesoría disponible en todo momento para tu tranquilidad."
-                            />
-                            <FeatureCard
-                                iconClass="fa-solid fa-truck-fast"
-                                bgClass="icon-green"
-                                title="Entrega Rápida"
-                                description="Recibe tus pedidos en menos de 60 minutos, directo en la puerta de tu casa."
-                            />
-                        </div>
-                    </main>
-                    <footer className="bg-dark text-white py-5 mt-5 text-center">
-                        © 2025 Farmacia Express. Todos los derechos reservados.
-                    </footer>
-                </div>
-            );
-        }
-        ReactDOM.createRoot(document.getElementById('root')).render(<HomePage />);
+        // Si necesitas contenido React, agrégalo aquí
     </script>
+    <footer class="bg-dark text-white py-4 text-center position-relative" style="z-index:3;">
+        © 2025 Farmacia Express. Todos los derechos reservados.
+    </footer>
 </body>
 </html>
