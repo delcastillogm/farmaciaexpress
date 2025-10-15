@@ -196,19 +196,59 @@
                 }
             ];
 
-            const handleServiceClick = (view) => {
-                if (!user) {
-                    setIsLoginModalOpen(true);
-                } else {
-                    // Check if service has a link
-                    const service = services.find(s => s.view === view);
-                    if (service && service.link) {
-                        window.location.href = service.link;
-                    } else {
-                        alert(`Navegando a ${view}`);
-                    }
-                }
-            };
+            <script type="text/babel">
+    // ... (otras definiciones)
+
+    // Mantén la constante services igual:
+    const services = [
+        {
+            id: 'form',
+            title: 'Hacer un Pedido',
+            description: 'Solicita tus medicamentos de forma rápida y segura con tu receta médica',
+            icon: ClipboardList,
+            color: 'bg-blue-700',
+            hoverColor: 'hover:bg-blue-800',
+            view: 'form',
+            requiresAuth: true
+        },
+        {
+            id: 'tracking',
+            title: 'Mis Pedidos',
+            description: 'Rastrea el estado de tus entregas y consulta tu historial',
+            icon: Package,
+            color: 'bg-green-600',
+            hoverColor: 'hover:bg-green-700',
+            view: 'tracking',
+            requiresAuth: true,
+            link: 'PharmacistReview.html'
+        },
+        {
+            id: 'pharmacist',
+            title: 'Panel Farmacéutico',
+            description: 'Revisa y gestiona los pedidos recibidos',
+            icon: UserCheck,
+            color: 'bg-purple-600',
+            hoverColor: 'hover:bg-purple-700',
+            view: 'pharmacist',
+            requiresAuth: true,
+            link: 'PharmacistReview.html'
+        }
+    ];
+
+    // -- CORREGIDO --
+    // Permite navegar aunque el usuario no esté logueado
+    const handleServiceClick = (view) => {
+        // Check if service has a link
+        const service = services.find(s => s.view === view);
+        if (service && service.link) {
+            window.location.href = service.link;
+        } else {
+            alert(`Navegando a ${view}`);
+        }
+    };
+
+    // ... (resto del código igual)
+</script>
 
             const handleLogin = (userData) => {
                 setUser(userData);
