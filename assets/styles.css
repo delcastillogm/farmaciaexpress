@@ -1,0 +1,412 @@
+/* Estilos globales del sistema */
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --success-color: #27ae60;
+  --danger-color: #e74c3c;
+  --warning-color: #f39c12;
+  --info-color: #3498db;
+  --light-bg: #ecf0f1;
+  --border-color: #bdc3c7;
+}
+
+body {
+  font-family: "Courier New", monospace;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.screen-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border: 3px solid #000;
+  padding: 0;
+}
+
+.screen-header {
+  background: white;
+  border-bottom: 3px solid #000;
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.screen-title {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 10px;
+  border: 2px solid #000;
+}
+
+.user-info {
+  background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 10px, #e0e0e0 10px, #e0e0e0 20px);
+  border: 2px solid #000;
+  padding: 12px 20px;
+  margin: 15px 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.screen-content {
+  padding: 20px;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #000;
+  background: white;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: #000;
+  color: white;
+}
+
+.tab-btn:hover:not(.active) {
+  background: #f0f0f0;
+}
+
+.filters-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 2px solid #000;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  background: white;
+}
+
+.btn-custom {
+  padding: 8px 20px;
+  border: 2px solid #000;
+  background: white;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: "Courier New", monospace;
+}
+
+.btn-custom:hover {
+  background: #000;
+  color: white;
+}
+
+.btn-primary-custom {
+  background: #000;
+  color: white;
+}
+
+.btn-primary-custom:hover {
+  background: #333;
+}
+
+.pedidos-list-header {
+  background: #d0d0d0;
+  border: 2px solid #000;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.pedido-item {
+  border: 2px solid #000;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+}
+
+.pedido-info {
+  flex: 1;
+}
+
+.pedido-id {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.pedido-details {
+  font-size: 12px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.badge-urgencia {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 2px solid #000;
+  font-size: 11px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.badge-urgente {
+  background: #fff;
+  color: #000;
+}
+
+.badge-normal {
+  background: #fff;
+  color: #000;
+}
+
+.badge-baja {
+  background: #fff;
+  color: #000;
+}
+
+.pedido-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.info-box {
+  border: 2px solid #000;
+  padding: 15px;
+  margin-bottom: 20px;
+  background: white;
+}
+
+.info-box-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.info-label {
+  font-weight: bold;
+  min-width: 150px;
+}
+
+.info-value {
+  color: #555;
+}
+
+.section-header {
+  background: #d0d0d0;
+  border: 2px solid #000;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  margin: 20px 0 15px 0;
+}
+
+.repartidor-item {
+  border: 2px solid #000;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+}
+
+.repartidor-nombre {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.badge-status {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 2px solid #000;
+  font-size: 11px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.alert-box {
+  border: 3px solid #000;
+  padding: 15px;
+  margin: 20px 0;
+  background: white;
+  position: relative;
+}
+
+.alert-box::before {
+  content: "⚠";
+  position: absolute;
+  left: -35px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  background: white;
+  border: 3px solid #000;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.alert-message {
+  font-size: 11px;
+  color: #555;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.form-label.required::after {
+  content: " *";
+  color: #e74c3c;
+}
+
+.form-control-custom {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #000;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+}
+
+.form-control-custom:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.input-group-custom {
+  display: flex;
+  gap: 10px;
+}
+
+.input-group-custom .form-control-custom {
+  flex: 1;
+}
+
+.validation-message {
+  font-size: 11px;
+  color: #555;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.success-box {
+  border: 2px solid #000;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: white;
+}
+
+.success-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.success-title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.notification-box {
+  border: 2px solid #000;
+  padding: 15px;
+  margin-top: 20px;
+  background: white;
+}
+
+.notification-title {
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 15px;
+  border: 2px solid #000;
+  font-size: 11px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.help-text {
+  font-size: 11px;
+  color: #666;
+  margin-top: 20px;
+  padding: 10px;
+  border-left: 3px solid #000;
+  background: #f9f9f9;
+}
+
+.help-text::before {
+  content: "▶ ";
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .pedido-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pedido-actions {
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  .pedido-actions .btn-custom {
+    flex: 1;
+  }
+
+  .filters-section {
+    flex-direction: column;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+}

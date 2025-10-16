@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparación de Pedido - Farmacia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="container py-4">
+        <div class="screen-container">
+            <div class="screen-header">
+                <h1 class="screen-title">PREPARACIÓN DE PEDIDO</h1>
+            </div>
+            
+            <div class="user-info">
+                <i class="fas fa-box me-2"></i>PREPARANDO <span id="pedidoId"></span>
+            </div>
+            
+            <div class="screen-content">
+                 Información del pedido 
+                <div class="info-box" id="pedidoInfo"></div>
+                
+                 Formulario de preparación 
+                <form id="formPreparacion" novalidate>
+                    <div class="form-group">
+                        <label class="form-label required">LOTE DEL MEDICAMENTO</label>
+                        <div class="input-group-custom">
+                            <input type="text" class="form-control-custom" id="inputLote" placeholder="ESCANEAR O ESCRIBIR LOTE" required pattern="[A-Z0-9]{6,}">
+                            <button type="button" class="btn-custom btn-primary-custom" onclick="escanearLote()">
+                                <i class="fas fa-barcode me-1"></i>SCAN
+                            </button>
+                        </div>
+                        <div class="validation-message">
+                            <i class="fas fa-check-circle me-1"></i>VALIDACIÓN AUTOMÁTICA DE LOTE
+                        </div>
+                        <div class="invalid-feedback">El lote debe tener al menos 6 caracteres alfanuméricos</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label required">FECHA VENCIMIENTO</label>
+                        <input type="text" class="form-control-custom" id="inputFechaVencimiento" placeholder="DD/MM/AAAA" required pattern="\d{2}/\d{2}/\d{4}">
+                        <div class="validation-message">
+                            <i class="fas fa-check-circle me-1"></i>VALIDACIÓN AUTOMÁTICA DE FECHA
+                        </div>
+                        <div class="invalid-feedback">Formato requerido: DD/MM/AAAA</div>
+                    </div>
+                    
+                     Alerta de validación 
+                    <div class="alert-box" id="alertaValidacion" style="display: none;">
+                        <div class="alert-title">¿Tengo lote y vencimiento claros?</div>
+                        <div class="alert-message">VALIDACIÓN EN TIEMPO REAL</div>
+                    </div>
+                    
+                     Botones de acción 
+                    <div class="form-actions">
+                        <button type="button" class="btn-custom" onclick="cancelarPreparacion()">
+                            <i class="fas fa-times me-2"></i>CANCELAR
+                        </button>
+                        <button type="submit" class="btn-custom btn-primary-custom">
+                            <i class="fas fa-check me-2"></i>MARCAR PREPARADO
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/database.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script>
+        // Proteger página
+        Auth.protectPage(['admin', 'farmaceutico']);
+
+        // Obtener ID del pedido
+        const urlParams = new URLSearchParams(window.location.search);
+        const pedidoId = urlParams.get('id');
+
+        if (!pedidoId) {
+            alert('No se especificó un pedido');
+            window.location.href = 'pedidos-aprobados.html';
+        }
+
+        // Cargar información del pedido
+        const pedido = DB.getPedidoById(pedidoId);
+        if (!pedido) {
+            alert('Pedido no encontrado');
+            window.location.href = 'pedidos-aprobados.html';
+        }
+
+        document.getElementById('pedidoId').textContent = pedido.id;
+        document.getElementById('pedidoInfo').innerHTML = `
+            <div class="info-box-title">
+                <span class="badge-urgencia badge-${pedido.urgencia.toLowerCase()}">EN PREPARACIÓN</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">PEDIDO:</span>
+                <span class="info-value">${pedido.id}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">MEDICAMENTO:</span>
+                <span class="info-value">${pedido.medicamento}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">CANTIDAD:</span>
+                <span class="info-value">${pedido.cantidad} UNIDADES</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">PACIENTE:</span>
+                <span class="info-value">${pedido.paciente} - ${pedido.habitacion}</span>
+            </div>
+        `;
+
+        // Escanear lote (simulado)
+        function escanearLote() {
+            const loteSimulado = 'LOT' + Math.random().toString(36).substr(2, 6).toUpperCase();
+            document.getElementById('inputLote').value = loteSimulado;
+            validarLote();
+        }
+        
+        // Validación en tiempo real
+        function validarLote() {
+            const lote = document.getElementById('inputLote').value;
+            const alerta = document.getElementById('alertaValidacion');
+            
+            if (lote.length >= 6) {
+                alerta.style.display = 'none';
+            } else {
+                alerta.style.display = 'block';
+            }
+        }
+        
+        function validarFecha() {
+            const fecha = document.getElementById('inputFechaVencimiento').value;
+            const regex = /^\d{2}\/\d{2}\/\d{4}$/;
+            const alerta = document.getElementById('alertaValidacion');
+            
+            if (regex.test(fecha)) {
+                alerta.style.display = 'none';
+            } else {
+                alerta.style.display = 'block';
+            }
+        }
+        
+        function cancelarPreparacion() {
+            if (confirm('¿Está seguro de cancelar la preparación?')) {
+                window.location.href = 'pedidos-aprobados.html';
+            }
+        }
+        
+        // Validación en tiempo real
+        document.getElementById('inputLote').addEventListener('input', validarLote);
+        document.getElementById('inputFechaVencimiento').addEventListener('input', validarFecha);
+        
+        // Envío del formulario
+        document.getElementById('formPreparacion').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!this.checkValidity()) {
+                e.stopPropagation();
+                this.classList.add('was-validated');
+                return;
+            }
+            
+            const lote = document.getElementById('inputLote').value;
+            const fecha = document.getElementById('inputFechaVencimiento').value;
+            
+            // Guardar en base de datos
+            DB.prepararPedido(pedidoId, lote, fecha);
+            
+            // Redirigir a confirmación
+            window.location.href = `confirmacion.html?id=${pedidoId}`;
+        });
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

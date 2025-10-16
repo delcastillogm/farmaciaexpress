@@ -3,57 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmacia Express</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <!-- Font Awesome CSS -->
+    <title>Farmacia Express - Delivery de Medicamentos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- CSS global -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- INICIO HEADER/NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 py-3" style="border-bottom:1.5px solid #e5e7eb;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 py-3">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold fs-4" href="index.html" style="color:#1976d2;">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold fs-4" href="index.html">
                 <i class="fa-solid fa-capsules text-primary fs-2"></i>
                 Farmacia Express
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Menú">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
                 <ul class="navbar-nav align-items-center gap-2">
                     <li class="nav-item">
-                        <a href="intranet.html" class="btn btn-outline-primary px-3">Intranet</a>
+                        <a href="pages/soporte.html" class="btn btn-outline-primary px-3">
+                            <i class="fa-solid fa-headset me-1"></i> Soporte
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a href="soporte.html" class="btn btn-outline-primary px-3">Soporte</a>
+                        <a href="pages/seguimiento.html" class="btn btn-outline-primary px-3">
+                            <i class="fa-solid fa-truck me-1"></i> Seguimiento
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a href="login.html" class="btn btn-outline-secondary px-3">Iniciar sesión</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="registro.html" class="btn btn-primary px-3">Regístrate</a>
+                        <a href="pages/login.html" class="btn btn-outline-secondary px-3">
+                            <i class="fa-solid fa-sign-in-alt me-1"></i> Intranet
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- FIN HEADER/NAVBAR -->
 
+    <!-- Hero Section -->
     <div class="main-card shadow-sm">
         <div class="row align-items-center justify-content-center g-5">
             <div class="col-md-6 text-center text-md-start">
-                <h1 class="fw-bold mb-3" style="color:#1976d2;">Tus Medicamentos en la Puerta de tu Casa</h1>
-                <p class="lead mb-4" style="color:#525c6d;">Servicio de delivery rápido y seguro de medicamentos con receta.</p>
-                <a href="MedicineDeliveryForm.html" class="btn btn-primary btn-main">Hacer un Pedido Ahora</a>
+                <h1 class="fw-bold mb-3 text-primary">Tus Medicamentos en la Puerta de tu Casa</h1>
+                <p class="lead mb-4 text-muted">Servicio de delivery rápido y seguro de medicamentos con receta médica. Atención profesional 24/7.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="pages/solicitar-pedido.html" class="btn btn-primary btn-lg px-4">
+                        <i class="fa-solid fa-paper-plane me-2"></i> Solicitar Pedido
+                    </a>
+                    <a href="pages/seguimiento.html" class="btn btn-outline-primary btn-lg px-4">
+                        <i class="fa-solid fa-search me-2"></i> Rastrear Pedido
+                    </a>
+                </div>
             </div>
             <div class="col-md-6 text-center">
-                <img src="imagen1.jpg" alt="Paciente en casa" class="hero-img">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagen1-e6bATndhM64vJHRLA1vEmLkNwpC8FU.jpg" alt="Paciente en casa" class="hero-img">
             </div>
         </div>
-        <div class="feature-row mt-3">
+
+        <!-- Features -->
+        <div class="feature-row mt-5">
             <div class="card card-feature text-center">
                 <div class="feature-icon icon-blue mx-auto">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -76,11 +85,43 @@
                 <p>Recibe tus pedidos en menos de 60 minutos, directo en la puerta de tu casa.</p>
             </div>
         </div>
+
+        <!-- How it works -->
+        <div class="row mt-5 pt-4">
+            <div class="col-12">
+                <h2 class="text-center fw-bold text-primary mb-4">¿Cómo Funciona?</h2>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="step-number">1</div>
+                <h5 class="fw-bold mt-3">Solicita</h5>
+                <p class="text-muted">Completa el formulario con tu receta médica</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="step-number">2</div>
+                <h5 class="fw-bold mt-3">Verificamos</h5>
+                <p class="text-muted">Nuestros farmacéuticos validan tu pedido</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="step-number">3</div>
+                <h5 class="fw-bold mt-3">Preparamos</h5>
+                <p class="text-muted">Empaquetamos tus medicamentos con cuidado</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="step-number">4</div>
+                <h5 class="fw-bold mt-3">Entregamos</h5>
+                <p class="text-muted">Recibe tu pedido en tu domicilio</p>
+            </div>
+        </div>
     </div>
-    <footer class="bg-dark text-white py-4 text-center position-relative mt-5" style="z-index:3;">
-        © 2025 Farmacia Express. Todos los derechos reservados.
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 text-center mt-5">
+        <div class="container">
+            <p class="mb-2"><i class="fa-solid fa-capsules me-2"></i> Farmacia Express</p>
+            <p class="mb-0 small">© 2025 Farmacia Express. Todos los derechos reservados.</p>
+        </div>
     </footer>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

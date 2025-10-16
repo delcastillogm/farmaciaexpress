@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Pedido - Farmacia Express</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold fs-4" href="../index.html">
+                <i class="fa-solid fa-capsules text-primary fs-2"></i>
+                Farmacia Express
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+                <ul class="navbar-nav align-items-center gap-2">
+                    <li class="nav-item">
+                        <a href="../index.html" class="btn btn-outline-primary px-3">
+                            <i class="fa-solid fa-home me-1"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="soporte.html" class="btn btn-outline-primary px-3">
+                            <i class="fa-solid fa-headset me-1"></i> Soporte
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-card shadow-sm">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-12 mx-auto">
+                <div class="text-center mb-4">
+                    <h1 class="fw-bold mb-3 text-primary">Solicita tu Pedido</h1>
+                    <p class="lead text-muted">Completa los datos para el delivery de tus medicamentos. Tu información es confidencial y segura.</p>
+                </div>
+
+                <form id="formPedido" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nombrePaciente" class="form-label fw-semibold">
+                                Nombre completo <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="nombrePaciente" name="nombre" 
+                                   placeholder="Ej: Juan Pérez" required minlength="3" maxlength="100">
+                            <div class="invalid-feedback">Por favor ingrese su nombre completo (mínimo 3 caracteres)</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="emailPaciente" class="form-label fw-semibold">
+                                Correo electrónico <span class="text-danger">*</span>
+                            </label>
+                            <input type="email" class="form-control" id="emailPaciente" name="email" 
+                                   placeholder="Ej: juan@email.com" required>
+                            <div class="invalid-feedback">Por favor ingrese un correo electrónico válido</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="telefonoPaciente" class="form-label fw-semibold">
+                                Teléfono <span class="text-danger">*</span>
+                            </label>
+                            <input type="tel" class="form-control" id="telefonoPaciente" name="telefono" 
+                                   placeholder="Ej: 999-123-456" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}">
+                            <div class="invalid-feedback">Formato: 999-123-456</div>
+                            <small class="text-muted">Formato: 999-123-456</small>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="direccionEntrega" class="form-label fw-semibold">
+                                Dirección de entrega <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="direccionEntrega" name="direccion" 
+                                   placeholder="Ej: Av. Siempre Viva 123" required minlength="10">
+                            <div class="invalid-feedback">Por favor ingrese una dirección válida (mínimo 10 caracteres)</div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="recetaMedica" class="form-label fw-semibold">
+                                Adjuntar receta médica <span class="text-muted">(opcional)</span>
+                            </label>
+                            <input type="file" class="form-control" id="recetaMedica" name="receta" 
+                                   accept="image/*,.pdf">
+                            <small class="text-muted">Formatos aceptados: JPG, PNG, PDF (máx. 5MB)</small>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="observaciones" class="form-label fw-semibold">
+                                Observaciones <span class="text-muted">(opcional)</span>
+                            </label>
+                            <textarea class="form-control" id="observaciones" name="observaciones" rows="3" 
+                                      placeholder="Indica alergias, horarios preferidos, etc." maxlength="500"></textarea>
+                            <small class="text-muted"><span id="charCount">0</span>/500 caracteres</small>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="aceptoTerminos" required>
+                                <label class="form-check-label fw-semibold" for="aceptoTerminos">
+                                    Acepto los <a href="#" target="_blank">términos y condiciones</a> y la 
+                                    <a href="#" target="_blank">política de privacidad</a> <span class="text-danger">*</span>
+                                </label>
+                                <div class="invalid-feedback">Debe aceptar los términos y condiciones</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg w-100 w-md-auto px-5">
+                                <i class="fa-solid fa-paper-plane me-2"></i> Solicitar Pedido
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="alert alert-info mt-4 text-center" role="alert">
+                    <i class="fa-solid fa-shield-halved me-2"></i>
+                    Tus datos y recetas serán tratados bajo estricta confidencialidad y solo por personal autorizado.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalConfirmacionLabel">
+                        <i class="fa-solid fa-circle-check me-2"></i> ¡Pedido registrado correctamente!
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div class="mb-3">
+                        <i class="fa-solid fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h5 class="mb-3">Tu pedido ha sido recibido</h5>
+                    <p class="mb-2">Número de seguimiento: <strong id="trackingNumber"></strong></p>
+                    <p class="text-muted">Pronto nos contactaremos contigo para coordinar la entrega.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-success px-4" id="btnAceptar">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 text-center mt-5">
+        <div class="container">
+            <p class="mb-0">© 2025 Farmacia Express. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/database.js"></script>
+    <script>
+        // Contador de caracteres
+        const observaciones = document.getElementById('observaciones');
+        const charCount = document.getElementById('charCount');
+        
+        observaciones.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+
+        // Formatear teléfono automáticamente
+        const telefono = document.getElementById('telefonoPaciente');
+        telefono.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 3 && value.length <= 6) {
+                value = value.slice(0, 3) + '-' + value.slice(3);
+            } else if (value.length > 6) {
+                value = value.slice(0, 3) + '-' + value.slice(3, 6) + '-' + value.slice(6, 9);
+            }
+            e.target.value = value;
+        });
+
+        // Validar tamaño de archivo
+        const receta = document.getElementById('recetaMedica');
+        receta.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file && file.size > 5 * 1024 * 1024) {
+                alert('El archivo es demasiado grande. El tamaño máximo es 5MB.');
+                e.target.value = '';
+            }
+        });
+
+        // Manejar envío del formulario
+        const form = document.getElementById('formPedido');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validar formulario
+            if (!form.checkValidity()) {
+                e.stopPropagation();
+                form.classList.add('was-validated');
+                return;
+            }
+
+            // Validación adicional de email
+            const email = document.getElementById('emailPaciente').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor ingrese un correo electrónico válido');
+                return;
+            }
+
+            const trackingNumber = 'PED-' + String(Date.now()).slice(-3).padStart(3, '0');
+            const nombre = document.getElementById('nombrePaciente').value;
+            const direccion = document.getElementById('direccionEntrega').value;
+            const telefono = document.getElementById('telefonoPaciente').value;
+            const observaciones = document.getElementById('observaciones').value;
+            
+            // Calculate estimated total (base price for demo)
+            const estimatedTotal = (50 + Math.random() * 100).toFixed(2);
+            
+            // Create new order in database
+            const newOrder = {
+                id: trackingNumber,
+                medicamento: "Medicamento solicitado",
+                cantidad: 1,
+                paciente: nombre,
+                habitacion: "Por asignar",
+                destino: direccion,
+                urgencia: "NORMAL",
+                zona: "CENTRO",
+                estado: "REGISTRADO",
+                total: estimatedTotal,
+                telefono: telefono,
+                email: email,
+                observaciones: observaciones,
+                lote: null,
+                vencimiento: null,
+                preparadoEn: null,
+                repartidor: null,
+                despachadoEn: null,
+                tracking: null,
+            };
+            
+            window.DB.pedidos.push(newOrder);
+            window.DB.saveToStorage();
+            
+            // Store order info for payment page
+            sessionStorage.setItem('currentOrderId', trackingNumber);
+            sessionStorage.setItem('currentOrderAmount', estimatedTotal);
+            
+            document.getElementById('trackingNumber').textContent = trackingNumber;
+
+            // Mostrar modal
+            const modal = new bootstrap.Modal(document.getElementById('modalConfirmacion'));
+            modal.show();
+
+            // Limpiar formulario
+            form.reset();
+            form.classList.remove('was-validated');
+            charCount.textContent = '0';
+        });
+
+        document.getElementById('btnAceptar').addEventListener('click', function() {
+            const orderId = sessionStorage.getItem('currentOrderId');
+            const amount = sessionStorage.getItem('currentOrderAmount');
+            
+            if (orderId && amount) {
+                window.location.href = `pagar-pedido.html?orderId=${orderId}&amount=${amount}`;
+            } else {
+                window.location.href = '../index.html';
+            }
+        });
+    </script>
+</body>
+</html>
