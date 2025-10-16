@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Registro de Pedido | Farmacia Express</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS global -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- INICIO HEADER/NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 py-3" style="border-bottom:1.5px solid #e5e7eb;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold fs-4" href="index.html" style="color:#1976d2;">
+                <i class="fa-solid fa-capsules text-primary fs-2"></i>
+                Farmacia Express
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+                <ul class="navbar-nav align-items-center gap-2">
+                    <li class="nav-item">
+                        <a href="index.html" class="btn btn-outline-primary px-3">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="intranet.html" class="btn btn-outline-primary px-3">Intranet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="soporte.html" class="btn btn-outline-primary px-3">Soporte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="btn btn-outline-secondary px-3">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="registro.html" class="btn btn-primary px-3">Regístrate</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- FIN HEADER/NAVBAR -->
+
+    <div class="main-card shadow-sm">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9 col-12 mx-auto">
+                <h1 class="fw-bold mb-3" style="color:#1976d2;">Solicita tu Pedido</h1>
+                <p class="lead mb-4" style="color:#525c6d;">Completa los datos para el delivery de tus medicamentos. Tu información es confidencial y segura.</p>
+                <form autocomplete="on" novalidate id="formPedido">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nombrePaciente" class="form-label fw-semibold">Nombre completo</label>
+                            <input type="text" class="form-control" id="nombrePaciente" name="nombre" placeholder="Ej: Juan Pérez" required autocomplete="name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emailPaciente" class="form-label fw-semibold">Correo electrónico</label>
+                            <input type="email" class="form-control" id="emailPaciente" name="email" placeholder="Ej: juan@email.com" required autocomplete="email">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="telefonoPaciente" class="form-label fw-semibold">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefonoPaciente" name="telefono" placeholder="Ej: 999-123-456" required autocomplete="tel">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="direccionEntrega" class="form-label fw-semibold">Dirección de entrega</label>
+                            <input type="text" class="form-control" id="direccionEntrega" name="direccion" placeholder="Ej: Av. Siempre Viva 123" required autocomplete="street-address">
+                        </div>
+                        <div class="col-12">
+                            <label for="recetaMedica" class="form-label fw-semibold">Adjuntar receta médica (opcional)</label>
+                            <input type="file" class="form-control" id="recetaMedica" name="receta" accept="image/*,.pdf">
+                        </div>
+                        <div class="col-12">
+                            <label for="observaciones" class="form-label fw-semibold">Observaciones (opcional)</label>
+                            <textarea class="form-control" id="observaciones" name="observaciones" rows="2" placeholder="Indica alergias, horarios preferidos, etc."></textarea>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="aceptoTerminos" required>
+                                <label class="form-check-label fw-semibold" for="aceptoTerminos">
+                                    Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-main w-100">
+                                <i class="fa-solid fa-paper-plane me-2"></i> Solicitar Pedido
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="alert alert-info mt-4 text-center small" role="alert">
+                    <i class="fa-solid fa-shield-halved me-1"></i>
+                    Tus datos y recetas serán tratados bajo estricta confidencialidad y solo por personal autorizado.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title" id="modalConfirmacionLabel">
+                <i class="fa-solid fa-circle-check me-2"></i> ¡Pedido registrado correctamente!
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body text-center">
+            Pronto nos contactaremos contigo para coordinar la entrega.<br>
+            <span class="text-muted small d-block mt-2">Gracias por confiar en Farmacia Express.</span>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal" id="cerrarModal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 text-center position-relative mt-5" style="z-index:3;">
+        © 2025 Farmacia Express. Todos los derechos reservados.
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script>
+        // Mostrar modal de conformidad al enviar el formulario
+        document.getElementById('formPedido').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var modal = new bootstrap.Modal(document.getElementById('modalConfirmacion'));
+            modal.show();
+
+            // Redirigir al cerrar el modal
+            var cerrarBtn = document.getElementById('cerrarModal');
+            cerrarBtn.onclick = function() {
+                window.location.href = "index.html";
+            };
+
+            // También redirige si el usuario cierra el modal por el ícono de la X o fondo
+            document.getElementById('modalConfirmacion').addEventListener('hidden.bs.modal', function() {
+                window.location.href = "index.html";
+            }, { once: true });
+        });
+    </script>
+</body>
+</html>
