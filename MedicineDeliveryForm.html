@@ -10,6 +10,57 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS global -->
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .main-title {
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #fff;
+            background: linear-gradient(90deg, #1976d2 60%, #38b000 100%);
+            padding: 1.6rem 0 1.1rem 0;
+            margin-bottom: 2.2rem;
+            border-radius: 1.5rem 1.5rem 0 0;
+            letter-spacing: .04em;
+            text-align: center;
+            box-shadow: 0 2px 24px 0 rgba(22,119,255,0.11);
+        }
+        .accordion-button:not(.collapsed) {
+            color: #1976d2;
+            background-color: #e3f0ff;
+            font-weight: 700;
+        }
+        .accordion-button {
+            font-size: 1.18rem;
+            font-weight: 700;
+        }
+        @media (min-width: 768px) {
+            .main-card {
+                max-width: 98vw !important;
+                width: 98vw !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .main-card {
+                max-width: 100vw !important;
+                width: 100vw !important;
+                padding: 1rem !important;
+            }
+            .main-title {
+                font-size: 1.45rem;
+                border-radius: 1.1rem 1.1rem 0 0;
+                padding: 1rem 0 .7rem 0;
+            }
+        }
+        .form-control, .form-select {
+            min-width: 0;
+            width: 100%;
+        }
+        .col-12, .col-md-6 {
+            width: 100%;
+        }
+        .accordion-body {
+            padding-top: 0.5rem;
+        }
+    </style>
 </head>
 <body>
     <!-- INICIO HEADER/NAVBAR -->
@@ -45,49 +96,105 @@
     </nav>
     <!-- FIN HEADER/NAVBAR -->
 
-    <div class="main-card shadow-sm">
+    <div class="main-card shadow-sm" style="max-width:98vw;">
+        <h1 class="main-title">Solicita tu Pedido</h1>
         <div class="row justify-content-center">
-            <div class="col-lg-7 col-md-9 col-12 mx-auto">
-                <h1 class="fw-bold mb-3" style="color:#1976d2;">Solicita tu Pedido</h1>
-                <p class="lead mb-4" style="color:#525c6d;">Completa los datos para el delivery de tus medicamentos. Tu información es confidencial y segura.</p>
+            <div class="col-12 mx-auto">
+                <p class="lead mb-4 text-center" style="color:#525c6d;">Completa los datos para el delivery de tus medicamentos. Tu información es confidencial y segura.</p>
                 <form autocomplete="on" novalidate id="formPedido">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label for="nombrePaciente" class="form-label fw-semibold">Nombre completo</label>
-                            <input type="text" class="form-control" id="nombrePaciente" name="nombre" placeholder="Ej: Juan Pérez" required autocomplete="name">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="emailPaciente" class="form-label fw-semibold">Correo electrónico</label>
-                            <input type="email" class="form-control" id="emailPaciente" name="email" placeholder="Ej: juan@email.com" required autocomplete="email">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="telefonoPaciente" class="form-label fw-semibold">Teléfono</label>
-                            <input type="tel" class="form-control" id="telefonoPaciente" name="telefono" placeholder="Ej: 999-123-456" required autocomplete="tel">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="direccionEntrega" class="form-label fw-semibold">Dirección de entrega</label>
-                            <input type="text" class="form-control" id="direccionEntrega" name="direccion" placeholder="Ej: Av. Siempre Viva 123" required autocomplete="street-address">
-                        </div>
-                        <div class="col-12">
-                            <label for="recetaMedica" class="form-label fw-semibold">Adjuntar receta médica (opcional)</label>
-                            <input type="file" class="form-control" id="recetaMedica" name="receta" accept="image/*,.pdf">
-                        </div>
-                        <div class="col-12">
-                            <label for="observaciones" class="form-label fw-semibold">Observaciones (opcional)</label>
-                            <textarea class="form-control" id="observaciones" name="observaciones" rows="2" placeholder="Indica alergias, horarios preferidos, etc."></textarea>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="aceptoTerminos" required>
-                                <label class="form-check-label fw-semibold" for="aceptoTerminos">
-                                    Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
-                                </label>
+                    <div class="accordion" id="accordionForm">
+                        <!-- Sección Datos del paciente -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingPaciente">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePaciente" aria-expanded="true" aria-controls="collapsePaciente">
+                                    Datos del paciente
+                                </button>
+                            </h2>
+                            <div id="collapsePaciente" class="accordion-collapse collapse show" aria-labelledby="headingPaciente" data-bs-parent="#accordionForm">
+                                <div class="accordion-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="nombrePaciente" class="form-label fw-semibold">Nombre completo</label>
+                                            <input type="text" class="form-control" id="nombrePaciente" name="nombre" placeholder="Ej: Juan Pérez" required autocomplete="name">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="emailPaciente" class="form-label fw-semibold">Correo electrónico</label>
+                                            <input type="email" class="form-control" id="emailPaciente" name="email" placeholder="Ej: juan@email.com" required autocomplete="email">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="telefonoPaciente" class="form-label fw-semibold">Teléfono</label>
+                                            <input type="tel" class="form-control" id="telefonoPaciente" name="telefono" placeholder="Ej: 999-123-456" required autocomplete="tel">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12 text-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-main w-100">
-                                <i class="fa-solid fa-paper-plane me-2"></i> Solicitar Pedido
-                            </button>
+                        <!-- Sección Datos de la entrega -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingEntrega">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEntrega" aria-expanded="false" aria-controls="collapseEntrega">
+                                    Datos de la entrega
+                                </button>
+                            </h2>
+                            <div id="collapseEntrega" class="accordion-collapse collapse" aria-labelledby="headingEntrega" data-bs-parent="#accordionForm">
+                                <div class="accordion-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="direccionEntrega" class="form-label fw-semibold">Dirección de entrega</label>
+                                            <input type="text" class="form-control" id="direccionEntrega" name="direccion" placeholder="Ej: Av. Siempre Viva 123" required autocomplete="street-address">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="observaciones" class="form-label fw-semibold">Observaciones (opcional)</label>
+                                            <textarea class="form-control" id="observaciones" name="observaciones" rows="2" placeholder="Indica alergias, horarios preferidos, etc."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sección Receta médica -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingReceta">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReceta" aria-expanded="false" aria-controls="collapseReceta">
+                                    Receta médica (opcional)
+                                </button>
+                            </h2>
+                            <div id="collapseReceta" class="accordion-collapse collapse" aria-labelledby="headingReceta" data-bs-parent="#accordionForm">
+                                <div class="accordion-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="recetaMedica" class="form-label fw-semibold">Adjuntar receta médica</label>
+                                            <input type="file" class="form-control" id="recetaMedica" name="receta" accept="image/*,.pdf">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sección Términos y envío -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTerminos">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTerminos" aria-expanded="false" aria-controls="collapseTerminos">
+                                    Confirmación y envío
+                                </button>
+                            </h2>
+                            <div id="collapseTerminos" class="accordion-collapse collapse" aria-labelledby="headingTerminos" data-bs-parent="#accordionForm">
+                                <div class="accordion-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="form-check mt-1">
+                                                <input class="form-check-input" type="checkbox" id="aceptoTerminos" required>
+                                                <label class="form-check-label fw-semibold" for="aceptoTerminos">
+                                                    Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center mt-4">
+                                            <button type="submit" class="btn btn-primary btn-main w-100">
+                                                <i class="fa-solid fa-paper-plane me-2"></i> Solicitar Pedido
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
