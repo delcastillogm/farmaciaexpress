@@ -9,7 +9,7 @@
     <style>
         /* Added pharmacy module styles for logistics */
         .pharmacy-body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: white;
             min-height: 100vh;
             padding: 2rem 1rem;
         }
@@ -435,23 +435,20 @@
             </svg>
             <span>SISTEMA LOGÍSTICA</span>
         </div>
-        <div class="d-flex align-items-center gap-3">
-            <div class="pharmacy-user">
-                <div class="user-avatar">LR</div>
-                <div class="user-info">
-                    <div class="user-name" id="userName">LUIS RAMOS</div>
-                    <div class="user-role">COORDINADOR</div>
+		<div class="d-flex align-items-center gap-3">
+                <div class="user-profile">
+                    <div class="user-avatar-circle" id="userAvatar">LR</div>
+                    <div class="user-info-text">
+                        <p class="name" id="userName">LUIS RAMOS</p>
+                        <p class="role" id="userRole">COORDINADOR</p>
+                    </div>
                 </div>
+                <button class="btn btn-outline-danger btn-sm" onclick="cerrarSesion()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Salir
+                </button>
             </div>
-            <button class="btn btn-outline-danger btn-sm" onclick="cerrarSesion()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                    <polyline points="16 17 21 12 16 7"></polyline>
-                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                </svg>
-                Salir
-            </button>
-        </div>
+			
     </div>
 
     <div class="pharmacy-tabs">
