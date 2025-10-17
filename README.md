@@ -76,4 +76,4 @@ Este proyecto es para fines educativos y demostrativos. Consulta el archivo LICE
 
 ## 👨‍💻 Autor
 
-- **Guillermo Del Castillo** ([delcastillogm](https://github.com/delcastillogm))
+- ** Grupo 4
