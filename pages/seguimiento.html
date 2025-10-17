@@ -200,6 +200,21 @@
           </div>
           <div class="text-muted small mt-2"><i class="bi bi-geo-alt me-1"></i><span id="ordAddress">—</span></div>
           
+          <!-- Added survey button for delivered orders -->
+          <div id="surveySection" class="d-none">
+            <div class="alert alert-success mt-3 d-flex align-items-center justify-content-between">
+              <div>
+                <i class="bi bi-star-fill me-2"></i>
+                <strong>¡Tu pedido ha sido entregado!</strong>
+                <p class="mb-0 small">Ayúdanos a mejorar completando una breve encuesta de satisfacción.</p>
+              </div>
+              <a id="surveyBtn" href="#" class="btn btn-success">
+                <i class="bi bi-clipboard-check me-1"></i>
+                Completar Encuesta
+              </a>
+            </div>
+          </div>
+          
           <!-- Added action buttons for new order and home -->
           <div class="action-buttons">
             <a href="solicitar-pedido.html" class="btn-action-primary">
@@ -375,6 +390,15 @@
       });
       el('#ordTotal').textContent = fmt(total);
       el('#ordAddress').textContent = o.deliveryAddress;
+      
+      const surveySection = el('#surveySection');
+      const surveyBtn = el('#surveyBtn');
+      if(o.status === 'ENTREGADO') {
+        surveySection.classList.remove('d-none');
+        surveyBtn.href = `encuesta-satisfaccion.html?pedido=${o.id}`;
+      } else {
+        surveySection.classList.add('d-none');
+      }
     }
 
     renderOrdersList();

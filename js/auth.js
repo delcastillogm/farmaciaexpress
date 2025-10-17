@@ -62,7 +62,15 @@ class AuthSystem {
   logout() {
     this.currentUser = null
     this.saveSession()
-    window.location.href = window.location.pathname.includes("/pages/") ? "login.html" : "pages/login.html"
+    // Detectar si estamos en una subcarpeta y redirigir apropiadamente
+    const path = window.location.pathname
+    if (path.includes("/repartidor/") || path.includes("/farmacia/") || path.includes("/logistica/")) {
+      window.location.href = "../login.html"
+    } else if (path.includes("/pages/")) {
+      window.location.href = "login.html"
+    } else {
+      window.location.href = "pages/login.html"
+    }
   }
 
   // Verificar si está autenticado
@@ -115,6 +123,9 @@ class AuthSystem {
         window.location.href = isInPagesFolder
           ? "logistica/pedidos-preparados.html"
           : "pages/logistica/pedidos-preparados.html"
+        break
+      case "repartidor":
+        window.location.href = isInPagesFolder ? "repartidor/mis-pedidos.html" : "pages/repartidor/mis-pedidos.html"
         break
       default:
         window.location.href = isInPagesFolder ? "../index.html" : "index.html"

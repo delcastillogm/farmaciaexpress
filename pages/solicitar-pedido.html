@@ -3,32 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitar Pedido - Farmacia Express</title>
+    <title>Registro de Pedido - Farmacia Express</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* Added accordion-based form styles */
+        .main-header {
+            background: #143c66;
+            color: #fff;
+            padding: 2.2rem 1rem 1.6rem 1rem;
+            text-align: center;
+            border-radius: 1.5rem 1.5rem 0 0;
+            box-shadow: 0 2px 24px 0 rgba(22,119,255,0.11);
+            margin-bottom: 2.2rem;
+        }
+        .main-header h1 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            letter-spacing: .03em;
+            color: #fff !important;
+        }
+        .main-header .subtitle {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: #e3f0ff;
+        }
+        .accordion-button:not(.collapsed) {
+            color: #1976d2;
+            background-color: #e3f0ff;
+            font-weight: 700;
+        }
+        .accordion-button {
+            font-size: 1.18rem;
+            font-weight: 700;
+        }
+        .card-section {
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 16px 0 rgba(22,119,255,0.07);
+            background: #fff;
+            border: none;
+            margin-bottom: 2rem;
+            padding: 2.2rem 1.5rem 1.2rem 1.5rem;
+        }
+        .form-control, .form-select {
+            min-width: 0;
+            width: 100%;
+        }
+        .accordion-body {
+            padding-top: 0.5rem;
+        }
+        .main-card {
+            max-width: 900px;
+            margin: 3rem auto 2rem auto;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+        @media (max-width: 767px) {
+            .main-card {
+                max-width: 100vw !important;
+                width: 100vw !important;
+                padding: 1rem !important;
+            }
+            .main-header h1 {
+                font-size: 1.45rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Updated navbar with Bootstrap Icons -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold fs-4" href="../index.html">
-                <i class="fa-solid fa-capsules text-primary fs-2"></i>
+                <i class="bi bi-capsule text-primary fs-2"></i>
                 Farmacia Express
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Menú">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
                 <ul class="navbar-nav align-items-center gap-2">
                     <li class="nav-item">
                         <a href="../index.html" class="btn btn-outline-primary px-3">
-                            <i class="fa-solid fa-home me-1"></i> Inicio
+                            <i class="bi bi-house-door"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="btn btn-outline-primary px-3">
+                            <i class="bi bi-building"></i> Intranet
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="soporte.html" class="btn btn-outline-primary px-3">
-                            <i class="fa-solid fa-headset me-1"></i> Soporte
+                            <i class="bi bi-headset"></i> Soporte
                         </a>
                     </li>
                 </ul>
@@ -36,92 +108,125 @@
         </div>
     </nav>
 
-    <div class="main-card shadow-sm">
+    <!-- Restructured form with accordion sections -->
+    <div class="main-card">
+        <div class="main-header">
+            <h1>Registro de Pedido</h1>
+            <div class="subtitle">Completa los datos para el delivery de tus medicamentos. Tu información es confidencial y segura.</div>
+        </div>
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10 col-12 mx-auto">
-                <div class="text-center mb-4">
-                    <h1 class="fw-bold mb-3 text-primary">Solicita tu Pedido</h1>
-                    <p class="lead text-muted">Completa los datos para el delivery de tus medicamentos. Tu información es confidencial y segura.</p>
-                </div>
-
-                <form id="formPedido" novalidate>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label for="nombrePaciente" class="form-label fw-semibold">
-                                Nombre completo <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" class="form-control" id="nombrePaciente" name="nombre" 
-                                   placeholder="Ej: Juan Pérez" required minlength="3" maxlength="100">
-                            <div class="invalid-feedback">Por favor ingrese su nombre completo (mínimo 3 caracteres)</div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="emailPaciente" class="form-label fw-semibold">
-                                Correo electrónico <span class="text-danger">*</span>
-                            </label>
-                            <input type="email" class="form-control" id="emailPaciente" name="email" 
-                                   placeholder="Ej: juan@email.com" required>
-                            <div class="invalid-feedback">Por favor ingrese un correo electrónico válido</div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="telefonoPaciente" class="form-label fw-semibold">
-                                Teléfono <span class="text-danger">*</span>
-                            </label>
-                            <input type="tel" class="form-control" id="telefonoPaciente" name="telefono" 
-                                   placeholder="Ej: 999-123-456" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}">
-                            <div class="invalid-feedback">Formato: 999-123-456</div>
-                            <small class="text-muted">Formato: 999-123-456</small>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="direccionEntrega" class="form-label fw-semibold">
-                                Dirección de entrega <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" class="form-control" id="direccionEntrega" name="direccion" 
-                                   placeholder="Ej: Av. Siempre Viva 123" required minlength="10">
-                            <div class="invalid-feedback">Por favor ingrese una dirección válida (mínimo 10 caracteres)</div>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="recetaMedica" class="form-label fw-semibold">
-                                Adjuntar receta médica <span class="text-muted">(opcional)</span>
-                            </label>
-                            <input type="file" class="form-control" id="recetaMedica" name="receta" 
-                                   accept="image/*,.pdf">
-                            <small class="text-muted">Formatos aceptados: JPG, PNG, PDF (máx. 5MB)</small>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="observaciones" class="form-label fw-semibold">
-                                Observaciones <span class="text-muted">(opcional)</span>
-                            </label>
-                            <textarea class="form-control" id="observaciones" name="observaciones" rows="3" 
-                                      placeholder="Indica alergias, horarios preferidos, etc." maxlength="500"></textarea>
-                            <small class="text-muted"><span id="charCount">0</span>/500 caracteres</small>
-                        </div>
-
-                        <div class="col-12 mt-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="aceptoTerminos" required>
-                                <label class="form-check-label fw-semibold" for="aceptoTerminos">
-                                    Acepto los <a href="#" target="_blank">términos y condiciones</a> y la 
-                                    <a href="#" target="_blank">política de privacidad</a> <span class="text-danger">*</span>
-                                </label>
-                                <div class="invalid-feedback">Debe aceptar los términos y condiciones</div>
+            <div class="col-12 mx-auto">
+                <form autocomplete="on" novalidate id="formPedido">
+                    <div class="accordion" id="accordionForm">
+                        <!-- Sección Datos del paciente -->
+                        <div class="accordion-item card-section">
+                            <h2 class="accordion-header" id="headingPaciente">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePaciente" aria-expanded="true" aria-controls="collapsePaciente">
+                                    <i class="bi bi-person-vcard me-2"></i> Datos del paciente
+                                </button>
+                            </h2>
+                            <div id="collapsePaciente" class="accordion-collapse collapse show" aria-labelledby="headingPaciente" data-bs-parent="#accordionForm">
+                                <div class="accordion-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="nombrePaciente" class="form-label fw-semibold">Nombre completo <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="nombrePaciente" name="nombre" placeholder="Ej: Juan Pérez" required minlength="3" maxlength="100" autocomplete="name">
+                                            <div class="invalid-feedback">Por favor ingrese su nombre completo (mínimo 3 caracteres)</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="emailPaciente" class="form-label fw-semibold">Correo electrónico <span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control" id="emailPaciente" name="email" placeholder="Ej: juan@email.com" required autocomplete="email">
+                                            <div class="invalid-feedback">Por favor ingrese un correo electrónico válido</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="telefonoPaciente" class="form-label fw-semibold">Teléfono <span class="text-danger">*</span></label>
+                                            <input type="tel" class="form-control" id="telefonoPaciente" name="telefono" placeholder="Ej: 999-123-456" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" autocomplete="tel">
+                                            <div class="invalid-feedback">Formato: 999-123-456</div>
+                                            <small class="text-muted">Formato: 999-123-456</small>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-12 text-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg w-100 w-md-auto px-5">
-                                <i class="fa-solid fa-paper-plane me-2"></i> Solicitar Pedido
-                            </button>
+                        <!-- Sección Datos de la entrega -->
+                        <div class="accordion-item card-section">
+                            <h2 class="accordion-header" id="headingEntrega">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEntrega" aria-expanded="false" aria-controls="collapseEntrega">
+                                    <i class="bi bi-truck me-2"></i> Datos de la entrega
+                                </button>
+                            </h2>
+                            <div id="collapseEntrega" class="accordion-collapse collapse" aria-labelledby="headingEntrega" data-bs-parent="#accordionForm">
+                                <div class="accordion-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="direccionEntrega" class="form-label fw-semibold">Dirección de entrega <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="direccionEntrega" name="direccion" placeholder="Ej: Av. Siempre Viva 123" required minlength="10" autocomplete="street-address">
+                                            <div class="invalid-feedback">Por favor ingrese una dirección válida (mínimo 10 caracteres)</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="observaciones" class="form-label fw-semibold">Observaciones (opcional)</label>
+                                            <textarea class="form-control" id="observaciones" name="observaciones" rows="2" placeholder="Indica alergias, horarios preferidos, etc." maxlength="500"></textarea>
+                                            <small class="text-muted"><span id="charCount">0</span>/500 caracteres</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección Receta médica -->
+                        <div class="accordion-item card-section">
+                            <h2 class="accordion-header" id="headingReceta">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReceta" aria-expanded="false" aria-controls="collapseReceta">
+                                    <i class="bi bi-file-earmark-medical me-2"></i> Receta médica (opcional)
+                                </button>
+                            </h2>
+                            <div id="collapseReceta" class="accordion-collapse collapse" aria-labelledby="headingReceta" data-bs-parent="#accordionForm">
+                                <div class="accordion-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="recetaMedica" class="form-label fw-semibold">Adjuntar receta médica</label>
+                                            <input type="file" class="form-control" id="recetaMedica" name="receta" accept="image/*,.pdf">
+                                            <small class="text-muted">Formatos aceptados: JPG, PNG, PDF (máx. 5MB)</small>
+                                            <div id="recetaPreview" class="mt-2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección Términos y envío -->
+                        <div class="accordion-item card-section">
+                            <h2 class="accordion-header" id="headingTerminos">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTerminos" aria-expanded="false" aria-controls="collapseTerminos">
+                                    <i class="bi bi-shield-check me-2"></i> Confirmación y envío
+                                </button>
+                            </h2>
+                            <div id="collapseTerminos" class="accordion-collapse collapse" aria-labelledby="headingTerminos" data-bs-parent="#accordionForm">
+                                <div class="accordion-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="form-check mt-1">
+                                                <input class="form-check-input" type="checkbox" id="aceptoTerminos" required>
+                                                <label class="form-check-label fw-semibold" for="aceptoTerminos">
+                                                    Acepto los <a href="#" target="_blank">términos y condiciones</a> <span class="text-danger">*</span>
+                                                </label>
+                                                <div class="invalid-feedback">Debe aceptar los términos y condiciones</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center mt-4">
+                                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                                <i class="bi bi-send me-2"></i> Solicitar Pedido
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
-
-                <div class="alert alert-info mt-4 text-center" role="alert">
-                    <i class="fa-solid fa-shield-halved me-2"></i>
+                <div class="alert alert-info mt-4 text-center small" role="alert">
+                    <i class="bi bi-shield-halved me-1"></i>
                     Tus datos y recetas serán tratados bajo estricta confidencialidad y solo por personal autorizado.
                 </div>
             </div>
@@ -134,13 +239,13 @@
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">
                     <h5 class="modal-title" id="modalConfirmacionLabel">
-                        <i class="fa-solid fa-circle-check me-2"></i> ¡Pedido registrado correctamente!
+                        <i class="bi bi-check-circle me-2"></i> ¡Pedido registrado correctamente!
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body text-center py-4">
                     <div class="mb-3">
-                        <i class="fa-solid fa-check-circle text-success" style="font-size: 4rem;"></i>
+                        <i class="bi bi-check-circle text-success" style="font-size: 4rem;"></i>
                     </div>
                     <h5 class="mb-3">Tu pedido ha sido recibido</h5>
                     <p class="mb-2">Número de seguimiento: <strong id="trackingNumber"></strong></p>
@@ -153,11 +258,8 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4 text-center mt-5">
-        <div class="container">
-            <p class="mb-0">© 2025 Farmacia Express. Todos los derechos reservados.</p>
-        </div>
+    <footer class="bg-dark text-white py-4 text-center position-relative mt-5" style="z-index:3;">
+        © 2025 Farmacia Express. Todos los derechos reservados.
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -183,12 +285,33 @@
             e.target.value = value;
         });
 
-        // Validar tamaño de archivo
-        const receta = document.getElementById('recetaMedica');
-        receta.addEventListener('change', function(e) {
+        document.getElementById('recetaMedica').addEventListener('change', function(e){
+            const preview = document.getElementById('recetaPreview');
             const file = e.target.files[0];
-            if (file && file.size > 5 * 1024 * 1024) {
+            
+            if(!file) {
+                preview.innerHTML = "";
+                return;
+            }
+            
+            // Validate file size
+            if (file.size > 5 * 1024 * 1024) {
                 alert('El archivo es demasiado grande. El tamaño máximo es 5MB.');
+                e.target.value = '';
+                preview.innerHTML = "";
+                return;
+            }
+            
+            if(file.type.startsWith("image/")) {
+                const reader = new FileReader();
+                reader.onload = function(ev){
+                    preview.innerHTML = `<img src="${ev.target.result}" alt="Receta" style="max-width:150px;border-radius:0.7rem;box-shadow:0 2px 8px #1976d233;margin-top:.5rem;">`;
+                };
+                reader.readAsDataURL(file);
+            } else if(file.type === "application/pdf") {
+                preview.innerHTML = `<span class="text-primary"><i class="bi bi-file-earmark-pdf me-1"></i> ${file.name}</span>`;
+            } else {
+                preview.innerHTML = `<span class="text-danger">Archivo no soportado</span>`;
                 e.target.value = '';
             }
         });
@@ -262,6 +385,7 @@
             form.reset();
             form.classList.remove('was-validated');
             charCount.textContent = '0';
+            document.getElementById('recetaPreview').innerHTML = '';
         });
 
         document.getElementById('btnAceptar').addEventListener('click', function() {

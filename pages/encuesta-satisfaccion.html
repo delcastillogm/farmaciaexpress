@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encuesta de Satisfacción - Farmacia Express</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem 0;
+    }
+    .contenedor-encuesta {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .contenedor-encuesta h2 {
+      color: #667eea;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .contenedor-encuesta > p {
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+    .pregunta {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #f9fafb;
+      border-radius: 1rem;
+      border: 2px solid #e5e7eb;
+      transition: all 0.3s;
+    }
+    .pregunta:hover {
+      border-color: #667eea;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+    }
+    .pregunta label {
+      font-weight: 600;
+      color: #374151;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .estrellas {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 2.5rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .estrella {
+      cursor: pointer;
+      color: #d1d5db;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .estrella:hover,
+    .estrella.activa {
+      color: #fbbf24;
+      transform: scale(1.2);
+    }
+    .opciones {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .opciones label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+    .opciones label:hover {
+      border-color: #667eea;
+      background: #f0f4ff;
+    }
+    .opciones input[type="checkbox"]:checked + label,
+    .opciones input[type="radio"]:checked + label {
+      border-color: #667eea;
+      background: #e0e7ff;
+    }
+    .opciones input {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 0.75rem;
+      font-family: inherit;
+      resize: vertical;
+      transition: all 0.2s;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    .btn-enviar {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+    .btn-enviar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+    .modal-contenido {
+      background: white;
+      padding: 3rem;
+      border-radius: 1.5rem;
+      text-align: center;
+      max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease-out;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .modal-contenido h3 {
+      color: #667eea;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .modal-contenido p {
+      color: #6b7280;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    .modal-contenido button {
+      padding: 0.75rem 2rem;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .modal-contenido button:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 768px) {
+      .contenedor-encuesta {
+        padding: 1.5rem;
+        margin: 0 1rem;
+      }
+      .estrellas {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor-encuesta">
+    <h2>
+      <i class="bi bi-heart-pulse"></i>
+      Encuesta de Satisfacción
+    </h2>
+    <p>Tu opinión nos ayuda a mejorar nuestros servicios. Por favor, completa esta breve encuesta.</p>
+
+    <form id="formEncuesta">
+      <!-- PREGUNTA 1 -->
+      <div class="pregunta">
+        <label>1. ¿Cómo calificarías tu experiencia general?</label>
+        <div class="estrellas">
+          <span class="estrella" data-value="1">★</span>
+          <span class="estrella" data-value="2">★</span>
+          <span class="estrella" data-value="3">★</span>
+          <span class="estrella" data-value="4">★</span>
+          <span class="estrella" data-value="5">★</span>
+        </div>
+      </div>
+
+      <!-- PREGUNTA 2 -->
+      <div class="pregunta">
+        <label>2. ¿Qué aspectos destacarías de nuestro servicio?</label>
+        <div class="opciones">
+          <label>
+            <input type="checkbox" name="aspectos" value="Rapidez">
+            <span>Rapidez en la entrega</span>
+          </label>
+          <label>
+            <input type="checkbox" name="aspectos" value="Atención amable">
+            <span>Atención amable del personal</span>
+          </label>
+          <label>
+            <input type="checkbox" name="aspectos" value="Precios accesibles">
+            <span>Precios accesibles</span>
+          </label>
+          <label>
+            <input type="checkbox" name="aspectos" value="Disponibilidad de productos">
+            <span>Disponibilidad de productos</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- PREGUNTA 3 -->
+      <div class="pregunta">
+        <label>3. ¿Volverías a usar nuestros servicios?</label>
+        <div class="opciones">
+          <label>
+            <input type="radio" name="volveria" value="Sí">
+            <span>Sí, definitivamente</span>
+          </label>
+          <label>
+            <input type="radio" name="volveria" value="No">
+            <span>No, no lo haría</span>
+          </label>
+          <label>
+            <input type="radio" name="volveria" value="Tal vez">
+            <span>Tal vez, depende</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- COMENTARIO -->
+      <div class="pregunta">
+        <label>4. Déjanos un comentario adicional (opcional):</label>
+        <textarea name="comentario" rows="4" placeholder="Escribe aquí tu opinión o sugerencias..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-enviar">
+        <i class="bi bi-send me-2"></i>
+        Enviar Encuesta
+      </button>
+    </form>
+  </div>
+
+  <!-- MODAL MENSAJE -->
+  <div id="modalGracias" class="modal">
+    <div class="modal-contenido">
+      <h3>🎉 ¡Gracias por tu tiempo!</h3>
+      <p>Tu opinión nos ayuda a mejorar nuestros servicios. 💊</p>
+      <button id="cerrarModal">Volver al Seguimiento</button>
+    </div>
+  </div>
+
+  <script src="../js/database.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const estrellas = document.querySelectorAll(".estrella");
+      const form = document.getElementById("formEncuesta");
+      const modal = document.getElementById("modalGracias");
+      const cerrarModal = document.getElementById("cerrarModal");
+      let valorSeleccionado = 0;
+
+      // Get order ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get('pedido');
+
+      // Star rating control
+      estrellas.forEach(estrella => {
+        estrella.addEventListener("click", () => {
+          valorSeleccionado = estrella.getAttribute("data-value");
+          estrellas.forEach(e => e.classList.remove("activa"));
+          for (let i = 0; i < valorSeleccionado; i++) {
+            estrellas[i].classList.add("activa");
+          }
+        });
+      });
+
+      // Submit survey
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Collect survey data
+        const aspectos = Array.from(document.querySelectorAll('input[name="aspectos"]:checked'))
+          .map(cb => cb.value);
+        const volveria = document.querySelector('input[name="volveria"]:checked')?.value || '';
+        const comentario = document.querySelector('textarea[name="comentario"]').value;
+
+        const surveyData = {
+          pedidoId: orderId,
+          calificacion: valorSeleccionado,
+          aspectos: aspectos,
+          volveria: volveria,
+          comentario: comentario,
+          fecha: new Date().toISOString()
+        };
+
+        // Save to localStorage
+        const surveys = JSON.parse(localStorage.getItem('encuestas') || '[]');
+        surveys.push(surveyData);
+        localStorage.setItem('encuestas', JSON.stringify(surveys));
+
+        console.log('[v0] Survey submitted:', surveyData);
+
+        // Show thank you modal
+        setTimeout(() => {
+          modal.style.display = "flex";
+          form.reset();
+          estrellas.forEach(e => e.classList.remove("activa"));
+        }, 400);
+      });
+
+      // Close modal and redirect
+      cerrarModal.addEventListener("click", () => {
+        modal.style.display = "none";
+        window.location.href = 'seguimiento.html';
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.style.display = "none";
+          window.location.href = 'seguimiento.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

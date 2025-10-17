@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Entrega - Farmacia Express</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        .main-header {
+            background: #143c66;
+            color: #fff;
+            padding: 2rem 1rem 1.5rem 1rem;
+            text-align: center;
+            border-radius: 1.5rem 1.5rem 0 0;
+            box-shadow: 0 2px 24px 0 rgba(22,119,255,0.11);
+            margin-bottom: 2rem;
+        }
+        .main-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            letter-spacing: .03em;
+        }
+        .main-header .subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #e3f0ff;
+        }
+        .card-section {
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 16px 0 rgba(22,119,255,0.07);
+            background: #fff;
+            border: none;
+            margin-bottom: 2rem;
+            padding: 2rem 1.5rem;
+        }
+        .signature-box {
+            border: 2px dashed #2563eb;
+            height: 150px;
+            border-radius: 12px;
+            background-color: #f8fafc;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .signature-box:hover {
+            background-color: #eff6ff;
+            border-color: #1d4ed8;
+        }
+        .preview-image {
+            max-width: 200px;
+            border-radius: 0.7rem;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 2rem 0;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0">
+                    <div class="main-header">
+                        <h1>Registrar Entrega</h1>
+                        <div class="subtitle">Completa los datos de la entrega realizada al cliente</div>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="formEntrega" novalidate>
+                            <!-- Detalle del pedido -->
+                            <div class="card-section">
+                                <h5 class="fw-bold mb-3">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                    </svg>
+                                    Detalle del Pedido
+                                </h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">ID del Pedido</label>
+                                        <input type="text" class="form-control" id="pedidoId" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Cliente</label>
+                                        <input type="text" class="form-control" id="cliente" readonly>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold">Dirección de Entrega</label>
+                                        <input type="text" class="form-control" id="direccion" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Medicamento</label>
+                                        <input type="text" class="form-control" id="medicamento" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Cantidad</label>
+                                        <input type="text" class="form-control" id="cantidad" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Detalle de la entrega -->
+                            <div class="card-section">
+                                <h5 class="fw-bold mb-3">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2">
+                                        <rect x="1" y="3" width="15" height="13"></rect>
+                                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                    </svg>
+                                    Detalle de la Entrega
+                                </h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Fecha de Entrega</label>
+                                        <input type="date" class="form-control" id="fechaEntrega" required>
+                                        <div class="invalid-feedback">Ingrese la fecha de entrega</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Hora de Entrega</label>
+                                        <input type="time" class="form-control" id="horaEntrega" required>
+                                        <div class="invalid-feedback">Ingrese la hora de entrega</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold">Nombre del Receptor</label>
+                                        <input type="text" class="form-control" id="nombreReceptor" placeholder="Nombre completo" required>
+                                        <div class="invalid-feedback">Ingrese el nombre del receptor</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold">Comentarios (Opcional)</label>
+                                        <textarea class="form-control" id="comentarios" rows="2" placeholder="Observaciones sobre la entrega"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold">Evidencia de Entrega (Foto)</label>
+                                        <input type="file" class="form-control" id="evidencia" accept="image/*" required>
+                                        <div class="invalid-feedback">Adjunte una foto de evidencia</div>
+                                        <div id="previewContainer" class="mt-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2 justify-content-between">
+                                <button type="button" class="btn btn-outline-secondary px-4" onclick="volver()">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-1">
+                                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                                        <polyline points="12 19 5 12 12 5"></polyline>
+                                    </svg>
+                                    Volver
+                                </button>
+                                <button type="submit" class="btn btn-success px-4">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-1">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Confirmar Entrega
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Entrega Registrada
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <p class="mb-0">La entrega ha sido registrada exitosamente.</p>
+                    <small class="text-muted">Gracias por tu labor en Farmacia Express.</small>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-success px-4" onclick="irAMisPedidos()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/database.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script>
+        // Proteger página
+        if (!Auth.protectPage(['repartidor'])) {
+            throw new Error('Acceso denegado');
+        }
+
+        // Obtener ID del pedido de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const pedidoId = urlParams.get('pedido');
+
+        if (!pedidoId) {
+            alert('No se especificó un pedido');
+            window.location.href = 'mis-pedidos.html';
+        }
+
+        // Cargar datos del pedido
+        const pedido = DB.getPedidoById(pedidoId);
+        if (!pedido) {
+            alert('Pedido no encontrado');
+            window.location.href = 'mis-pedidos.html';
+        }
+
+        // Llenar formulario con datos del pedido
+        document.getElementById('pedidoId').value = pedido.id;
+        document.getElementById('cliente').value = pedido.paciente;
+        document.getElementById('direccion').value = pedido.destino;
+        document.getElementById('medicamento').value = pedido.medicamento;
+        document.getElementById('cantidad').value = pedido.cantidad;
+
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('fechaEntrega').value = today;
+
+        // Preview de imagen
+        document.getElementById('evidencia').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('previewContainer');
+            
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    preview.innerHTML = `<img src="${ev.target.result}" alt="Evidencia" class="preview-image">`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = '';
+            }
+        });
+
+        // Enviar formulario
+        document.getElementById('formEntrega').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!this.checkValidity()) {
+                e.stopPropagation();
+                this.classList.add('was-validated');
+                return;
+            }
+
+            const evidenciaFile = document.getElementById('evidencia').files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(ev) {
+                const datosEntrega = {
+                    fechaEntrega: document.getElementById('fechaEntrega').value,
+                    horaEntrega: document.getElementById('horaEntrega').value,
+                    nombreReceptor: document.getElementById('nombreReceptor').value,
+                    comentarios: document.getElementById('comentarios').value,
+                    evidenciaFoto: ev.target.result, // Base64 image
+                };
+
+                if (DB.registrarEntrega(pedidoId, datosEntrega)) {
+                    const modal = new bootstrap.Modal(document.getElementById('modalConfirmacion'));
+                    modal.show();
+                } else {
+                    alert('Error al registrar la entrega');
+                }
+            };
+            
+            reader.readAsDataURL(evidenciaFile);
+        });
+
+        function volver() {
+            window.location.href = 'mis-pedidos.html';
+        }
+
+        function irAMisPedidos() {
+            window.location.href = 'mis-pedidos.html';
+        }
+    </script>
+</body>
+</html>

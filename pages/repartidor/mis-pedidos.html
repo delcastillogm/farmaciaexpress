@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - Repartidor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh;">
+    <!-- Improved header with modern design matching pharmacy/logistics modules -->
+    <div class="pharmacy-header">
+        <div class="pharmacy-logo">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+            <span>SISTEMA DE ENTREGAS</span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="pharmacy-user">
+                <div class="user-avatar" id="userAvatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">RP</div>
+                <div class="user-info">
+                    <div class="user-name" id="userName">REPARTIDOR</div>
+                    <div class="user-role">DELIVERY</div>
+                </div>
+            </div>
+            <button class="btn btn-outline-danger btn-sm" onclick="cerrarSesion()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                Salir
+            </button>
+        </div>
+    </div>
+
+    <div class="pharmacy-container">
+        <!-- Improved tabs with icons and modern styling -->
+        <div class="pharmacy-tabs">
+            <button class="pharmacy-tab active" onclick="cambiarTab('EN_DESPACHO')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+                PENDIENTES (<span id="countPendientes">0</span>)
+            </button>
+            <button class="pharmacy-tab" onclick="cambiarTab('ENTREGADO')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                ENTREGADOS (<span id="countEntregados">0</span>)
+            </button>
+        </div>
+
+        <!-- Improved filters section with better layout -->
+        <div class="pharmacy-filters">
+            <div class="row g-3">
+                <div class="col-md-5">
+                    <label class="form-label fw-semibold text-uppercase" style="color: #64748b; font-size: 0.85rem; letter-spacing: 0.5px;">Urgencia</label>
+                    <select class="form-select" id="filtroUrgencia" onchange="cargarPedidos()">
+                        <option value="">TODAS</option>
+                        <option value="URGENTE">URGENTE</option>
+                        <option value="NORMAL">NORMAL</option>
+                        <option value="BAJA">BAJA</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label fw-semibold text-uppercase" style="color: #64748b; font-size: 0.85rem; letter-spacing: 0.5px;">Zona</label>
+                    <select class="form-select" id="filtroZona" onchange="cargarPedidos()">
+                        <option value="">TODAS</option>
+                        <option value="NORTE">NORTE</option>
+                        <option value="SUR">SUR</option>
+                        <option value="CENTRO">CENTRO</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-primary w-100" onclick="cargarPedidos()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                        Actualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Improved cards container with modern design -->
+        <div class="pharmacy-cards" id="pedidosContainer">
+            <div class="text-center text-white py-5">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/database.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script>
+        let estadoActual = 'EN_DESPACHO';
+
+        // Proteger página
+        if (!Auth.protectPage(['repartidor'])) {
+            throw new Error('Acceso denegado');
+        }
+
+        // Cargar información del usuario
+        const usuario = Auth.getCurrentUser();
+        document.getElementById('userName').textContent = usuario.nombre.toUpperCase();
+        const iniciales = usuario.nombre.split(' ').map(n => n[0]).join('').substring(0, 2);
+        document.getElementById('userAvatar').textContent = iniciales;
+
+        function cambiarTab(estado) {
+            estadoActual = estado;
+            document.querySelectorAll('.pharmacy-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.closest('.pharmacy-tab').classList.add('active');
+            cargarPedidos();
+        }
+
+        function cargarPedidos() {
+            const urgencia = document.getElementById('filtroUrgencia').value;
+            const zona = document.getElementById('filtroZona').value;
+            
+            let pedidos = DB.getPedidosByRepartidor(usuario.nombre);
+            
+            // Filtrar por estado
+            pedidos = pedidos.filter(p => p.estado === estadoActual);
+            
+            // Filtrar por urgencia
+            if (urgencia) {
+                pedidos = pedidos.filter(p => p.urgencia === urgencia);
+            }
+            
+            // Filtrar por zona
+            if (zona) {
+                pedidos = pedidos.filter(p => p.zona === zona);
+            }
+
+            // Actualizar contadores
+            const pendientes = DB.getPedidosByRepartidor(usuario.nombre).filter(p => p.estado === 'EN_DESPACHO');
+            const entregados = DB.getPedidosByRepartidor(usuario.nombre).filter(p => p.estado === 'ENTREGADO');
+            document.getElementById('countPendientes').textContent = pendientes.length;
+            document.getElementById('countEntregados').textContent = entregados.length;
+
+            renderPedidos(pedidos);
+        }
+
+        function renderPedidos(pedidos) {
+            const container = document.getElementById('pedidosContainer');
+            
+            if (pedidos.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-white py-5">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mb-3" style="opacity: 0.5;">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <h5>No hay pedidos ${estadoActual === 'EN_DESPACHO' ? 'pendientes' : 'entregados'}</h5>
+                        <p class="text-white-50">Los pedidos aparecerán aquí cuando sean asignados</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = pedidos.map(pedido => `
+                <div class="pharmacy-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="fw-bold mb-0">${pedido.id}</h5>
+                        <span class="pharmacy-badge pharmacy-badge-${pedido.urgencia.toLowerCase()}">${pedido.urgencia}</span>
+                    </div>
+                    <div class="pharmacy-card-info">
+                        <div class="info-row">
+                            <span class="info-label">Destino</span>
+                            <span class="info-value">${pedido.destino}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Zona</span>
+                            <span class="info-value">${pedido.zona}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Medicamento</span>
+                            <span class="info-value">${pedido.medicamento}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Paciente</span>
+                            <span class="info-value">${pedido.paciente}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Habitación</span>
+                            <span class="info-value">${pedido.habitacion}</span>
+                        </div>
+                        ${pedido.despachadoEn ? `
+                        <div class="info-row">
+                            <span class="info-label">Fecha Despacho</span>
+                            <span class="info-value">${pedido.fechaDespacho || 'N/A'}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Hora Despacho</span>
+                            <span class="info-value">${pedido.horaDespacho || 'N/A'}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ${estadoActual === 'EN_DESPACHO' ? `
+                    <button class="pharmacy-btn" onclick="irARegistrarEntrega('${pedido.id}')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Registrar Entrega
+                    </button>
+                    ` : `
+                    <div class="alert alert-success mb-0 mt-3">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <strong>Entregado:</strong> ${pedido.fechaEntrega || 'N/A'} a las ${pedido.horaEntrega || 'N/A'}
+                    </div>
+                    `}
+                </div>
+            `).join('');
+        }
+
+        function irARegistrarEntrega(pedidoId) {
+            window.location.href = `registrar-entrega.html?pedido=${pedidoId}`;
+        }
+
+        function cerrarSesion() {
+            if (confirm('¿Está seguro que desea cerrar sesión?')) {
+                Auth.logout();
+            }
+        }
+
+        // Cargar pedidos al iniciar
+        cargarPedidos();
+    </script>
+</body>
+</html>
