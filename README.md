@@ -42,7 +42,8 @@ farmaciaexpress/
 3. **Corre el proyecto:**
    - Puedes abrir `index.html` directamente en tu navegador.
    - O levantar un servidor local (por ejemplo, con `live-server`).
-
+   - Para navegar en los formularios ingresa [
+](https://delcastillogm.github.io/farmaciaexpress/)
 ---
 
 ## 🧩 Requisitos
